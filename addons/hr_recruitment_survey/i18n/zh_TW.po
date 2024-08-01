@@ -4,6 +4,7 @@
 # 
 # Translators:
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Tony Ng, 2024
 # 
 msgid ""
 msgstr ""
@@ -11,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-14 10:28+0000\n"
 "PO-Revision-Date: 2021-09-14 12:23+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Tony Ng, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -92,7 +93,7 @@ msgstr "選擇一個工作職缺的面試表格，您可以把它列印出來讓
 #. module: hr_recruitment_survey
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_survey.view_hr_job_kanban_inherit
 msgid "Create Interview Form"
-msgstr "創建面試表單"
+msgstr "建立面試表單"
 
 #. module: hr_recruitment_survey
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_survey.hr_job_survey_inherit
@@ -146,7 +147,7 @@ msgstr "免費員工福利，如免費茶、咖啡以及文具用品"
 #: model:survey.question,comments_message:hr_recruitment_survey.survey_recruitment_form_p1_q7
 #: model:survey.question,comments_message:hr_recruitment_survey.survey_recruitment_form_p1_q8
 msgid "If other, please specify:"
-msgstr "如果是其它，請指定："
+msgstr "若為其他，請註明："
 
 #. module: hr_recruitment_survey
 #: model:survey.question.answer,value:hr_recruitment_survey.survey_recruitment_form_p1_q8_col2
@@ -269,6 +270,12 @@ msgstr "您輸入的答案格式無效。"
 #, python-format
 msgid "The applicant \"%s\" has finished the survey."
 msgstr "申請人“%s”已完成問券"
+
+#. module: hr_recruitment_survey
+#: code:addons/hr_recruitment_survey/models/survey_invite.py:0
+#, python-format
+msgid "The survey %(survey_link)s has been sent to %(partner_link)s"
+msgstr "調查%(survey_link)s已發送至%(partner_link)s"
 
 #. module: hr_recruitment_survey
 #: code:addons/hr_recruitment_survey/models/survey_invite.py:0

@@ -97,6 +97,68 @@ class TestQWebTField(TransactionCase):
         doc = etree.fromstring(rendered)
         self.assertEqual(len(doc.xpath('//script')), 1)
 
+    def test_default_value(self):
+        Partner = self.env['res.partner']
+        t = self.env['ir.ui.view'].create({
+            'name': 'test',
+            'type': 'qweb',
+            'arch_db': '''<t t-name="out-field-default">
+                <div t-field="record.name">
+                    DEFAULT
+                    <t t-out="'Text'" />
+                </div>
+            </t>''',
+        })
+
+        # record.name is non-empty
+        result = """
+                <div>My Company</div>
+        """
+        rendered = self.env['ir.qweb']._render(t.id, {
+            'record': Partner.new({'name': 'My Company'})
+        })
+        self.assertEqual(str(rendered.strip()), result.strip(), "")
+
+        # record.name is empty but not False or None, we should render depending on force_display
+        result = """
+                <div></div>
+        """
+        rendered = self.env['ir.qweb']._render(t.id, {
+            'record': Partner.new({'name': ''})
+        })
+        self.assertEqual(str(rendered.strip()), result.strip())
+
+        # record.name is False or None, we should render field default value
+        result = """
+                <div>
+                    DEFAULT
+                    Text
+                </div>
+        """
+        rendered = self.env['ir.qweb']._render(t.id, {
+            'record': Partner.new({})
+        })
+        self.assertEqual(str(rendered.strip()), result.strip())
+
+    def test_no_value_no_default_value(self):
+        # no value, no default value with attributes on t-field
+        t = self.env['ir.ui.view'].create({
+            'name': 'test',
+            'type': 'qweb',
+            'arch_db': '''<t t-name="out-field-default">
+                <div t-field="record.name"/>
+            </t>''',
+        })
+        result = """
+                <div data-oe-model="res.partner" data-oe-field="name" data-oe-type="char" data-oe-expression="record.name" data-oe-xpath="/t[1]/div[1]"></div>
+        """
+        # inherit_branding puts attribute on the field tag as well as force the display in case the field is empty
+        rendered = self.env['ir.qweb'].with_context(inherit_branding=True)._render(t.id, {
+            'record': self.env['res.partner'].new({}),
+        })
+        self.assertEqual(str(rendered.strip()), result.strip())
+
+
 class TestQWebNS(TransactionCase):
     def test_render_static_xml_with_namespace(self):
         """ Test the rendering on a namespaced view with no static content. The resulting string should be untouched.
@@ -597,6 +659,7 @@ class TestQWebNS(TransactionCase):
             """
         })
 
+        error_msg = ''
         try:
             "" + 0
         except TypeError as e:
@@ -684,6 +747,7 @@ class TestQWebBasic(TransactionCase):
             ("fn(a=11, b=22) or a",                     {'a': 1, 'fn': lambda a,b: b},  22),
             ("(lambda a: a)(5)",                        {},                             5),
             ("(lambda a: a[0])([5])",                   {},                             5),
+            ("(lambda test: len(test))('aaa')",         {},                             3),
             ("{'a': lambda a: a[0], 'b': 3}['a']([5])", {},                             5),
             ("list(map(lambda a: a[0], r))",            {'r': [(1,11), (2,22)]},        [1, 2]),
             ("z + (head or 'z')",                       {'z': 'a'},                     "az"),
@@ -693,8 +757,15 @@ class TestQWebBasic(TransactionCase):
             ("any({x == 5 for x in [1,2,3]})",          {},                             False),
             ("{x:y for x,y in [('a', 11),('b', 22)]}",  {},                             {'a': 11, 'b': 22}),
             ("[(y,x) for x,y in [(1, 11),(2, 22)]]",    {},                             [(11, 1), (22, 2)]),
-            ("(lambda a: a + 5)(a=x)",                  {'x': 10},                      15),
+            ("(lambda a: a + 5)(x)",                    {'x': 10},                      15),
+            ("(lambda a: a + x)(5)",                    {'x': 10},                      15),
             ("sum(x for x in range(4)) + ((x))",        {'x': 10},                      16),
+            ("['test_' + x for x in ['a', 'b']]",       {},                             ['test_a', 'test_b']),
+            ('[x for x in (1,2)]',                      {},                             [1, 2]),  # LOAD_FAST_AND_CLEAR
+            ('list(x for x in (1,2))',                  {},                             [1, 2]),  # END_FOR, CALL_INTRINSIC_1
+            ('v if v is None else w',                   {'v': False, 'w': 'foo'},       'foo'),  # POP_JUMP_IF_NONE
+            ('v if v is not None else w',               {'v': None, 'w': 'foo'},        'foo'),  # POP_JUMP_IF_NOT_NONE
+            ('{a for a in (1, 2)}',                     {},                             {1, 2}),  # RERAISE
         ]
 
         IrQweb = self.env['ir.qweb']
@@ -1005,6 +1076,32 @@ class TestQWebBasic(TransactionCase):
         rendered = self.env['ir.qweb']._render(t.id, {})
         self.assertEqual(rendered.strip(), result.strip())
 
+    def test_out_default_value(self):
+        t = self.env['ir.ui.view'].create({
+            'name': 'test',
+            'type': 'qweb',
+            'arch_db': '''<t t-name="out-default">
+                <span rows="10" t-out="a">
+                    DEFAULT
+                    <t t-out="'Text'" />
+                </span>
+            </t>'''
+        })
+        result = """
+                <span rows="10">Hello</span>
+        """
+        rendered = self.env['ir.qweb']._render(t.id, {'a': 'Hello'})
+        self.assertEqual(str(rendered.strip()), result.strip())
+
+        result = """
+                <span rows="10">
+                    DEFAULT
+                    Text
+                </span>
+        """
+        rendered = self.env['ir.qweb']._render(t.id, {})
+        self.assertEqual(str(rendered.strip()), result.strip())
+
     def test_esc_markup(self):
         # t-esc is equal to t-out
         t = self.env['ir.ui.view'].create({
@@ -1081,7 +1178,7 @@ class TestQWebBasic(TransactionCase):
         try:
             self.env['ir.qweb']._render(t.id)
         except QWebException as e:
-            self.assertIn('Can not compile expression', e.message)
+            self.assertIn('Cannot compile expression', e.message)
             self.assertIn('<div t-esc="abc + def + ("/>', e.message)
 
 from copy import deepcopy
@@ -1250,8 +1347,8 @@ class TestEmptyLines(TransactionCase):
             'arch_db': self.arch
         })
         rendered = self.env['ir.qweb']._render(t.id)
-        self.assertFalse(re.compile('^\s+\n').match(rendered))
-        self.assertFalse(re.compile('\n\s+\n').match(rendered))
+        self.assertFalse(re.compile('^\\s+\n').match(rendered))
+        self.assertFalse(re.compile('\n\\s+\n').match(rendered))
 
     def test_keep_empty_lines(self):
         t = self.env['ir.ui.view'].create({
@@ -1260,8 +1357,8 @@ class TestEmptyLines(TransactionCase):
             'arch_db': self.arch
         })
         rendered = self.env['ir.qweb']._render(t.id, {'__keep_empty_lines': True})
-        self.assertTrue(re.compile('^\s+\n').match(rendered))
-        self.assertTrue(re.compile('\n\s+\n').match(rendered))
+        self.assertTrue(re.compile('^\\s+\n').match(rendered))
+        self.assertTrue(re.compile('\n\\s+\n').match(rendered))
 
 
 class TestQWebMisc(TransactionCase):

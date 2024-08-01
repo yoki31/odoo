@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2021-07-12 07:50+0000\n"
 "PO-Revision-Date: 2021-09-14 12:25+0000\n"
 "Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -55,12 +55,12 @@ msgstr "員工: %s - PoS設定: %s\n"
 #. module: pos_hr
 #: model:ir.model.fields,field_description:pos_hr.field_pos_config__employee_ids
 msgid "Employees with access"
-msgstr "具有訪問許可權的員工"
+msgstr "具有存取許可權的員工"
 
 #. module: pos_hr
 #: model:ir.model.fields,help:pos_hr.field_pos_config__employee_ids
 msgid "If left empty, all employees can log in to the PoS session"
-msgstr "如果留空，所有員工都可以登錄到 PoS營業點"
+msgstr "如果留空，所有員工都可以登入到 PoS營業點"
 
 #. module: pos_hr
 #. openerp-web

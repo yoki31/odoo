@@ -3,7 +3,7 @@
 {
     'name': 'Argentina - Accounting',
     'icon': '/base/static/img/country_flags/ar.png',
-    'version': "3.4",
+    'version': "3.5",
     'description': """
 Functional
 ----------
@@ -112,14 +112,11 @@ Master Data:
         'demo/mono_demo.xml',
         'demo/respinsc_demo.xml',
         'demo/res_partner_demo.xml',
-        'demo/account_tax_demo.xml',
         'demo/product_product_demo.xml',
         'demo/account_customer_invoice_demo.xml',
         'demo/account_customer_refund_demo.xml',
         'demo/account_supplier_invoice_demo.xml',
         'demo/account_supplier_refund_demo.xml',
-        # restore
-        'demo/res_users_demo.xml',
     ],
     'installable': True,
     'auto_install': False,

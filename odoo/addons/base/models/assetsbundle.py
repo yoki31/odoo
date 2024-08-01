@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from contextlib import closing
 from datetime import datetime
 from subprocess import Popen, PIPE
 import base64
@@ -19,15 +20,16 @@ except ImportError:
     # `sassc` executable in the path.
     libsass = None
 
-from odoo import SUPERUSER_ID
+from odoo import release, SUPERUSER_ID
 from odoo.http import request
 from odoo.modules.module import get_resource_path
 from odoo.tools import func, misc, transpile_javascript, is_odoo_module, SourceMapGenerator, profiler
-from odoo.tools.misc import html_escape as escape
+from odoo.tools.misc import file_open, html_escape as escape
 from odoo.tools.pycompat import to_text
 
 _logger = logging.getLogger(__name__)
 
+EXTENSIONS = (".js", ".css", ".scss", ".sass", ".less")
 
 class CompileError(RuntimeError): pass
 def rjsmin(script):
@@ -100,8 +102,8 @@ class AssetNotFound(AssetError):
 
 class AssetsBundle(object):
     rx_css_import = re.compile("(@import[^;{]+;?)", re.M)
-    rx_preprocess_imports = re.compile("""(@import\s?['"]([^'"]+)['"](;?))""")
-    rx_css_split = re.compile("\/\*\! ([a-f0-9-]+) \*\/")
+    rx_preprocess_imports = re.compile(r"""(@import\s?['"]([^'"]+)['"](;?))""")
+    rx_css_split = re.compile(r"\/\*\! ([a-f0-9-]+) \*\/")
 
     TRACKED_BUNDLES = ['web.assets_common', 'web.assets_backend']
 
@@ -181,9 +183,11 @@ class AssetsBundle(object):
     @func.lazy_property
     def last_modified(self):
         """Returns last modified date of linked files"""
+        assets = [WebAsset(self, url=f['url'], filename=f['filename'], inline=f['content'])
+            for f in self.files
+            if f['atype'] in ['text/sass', "text/scss", "text/less", "text/css", "text/javascript"]]
         return max(itertools.chain(
-            (asset.last_modified for asset in self.javascripts),
-            (asset.last_modified for asset in self.stylesheets),
+            (asset.last_modified for asset in assets),
         ))
 
     @func.lazy_property
@@ -220,6 +224,18 @@ class AssetsBundle(object):
     def get_debug_asset_url(self, extra='', name='%', extension='%'):
         return f"/web/assets/debug/{extra}{name}{extension}"
 
+    def _unlink_attachments(self, attachments):
+        """ Unlinks attachments without actually calling unlink, so that the ORM cache is not cleared.
+
+        Specifically, if an attachment is generated while a view is rendered, clearing the ORM cache
+        could unload fields loaded with a sudo(), and expected to be readable by the view.
+        Such a view would be website.layout when main_object is an ir.ui.view.
+        """
+        to_delete = set(attach.store_fname for attach in attachments if attach.store_fname)
+        self.env.cr.execute(f"DELETE FROM {attachments._table} WHERE id IN %s", [tuple(attachments.ids)])
+        for file_path in to_delete:
+            attachments._file_delete(file_path)
+
     def clean_attachments(self, extension):
         """ Takes care of deleting any outdated ir.attachment records associated to a bundle before
         saving a fresh one.
@@ -246,7 +262,7 @@ class AssetsBundle(object):
         # avoid to invalidate cache if it's already empty (mainly useful for test)
 
         if attachments:
-            attachments.unlink()
+            self._unlink_attachments(attachments)
             # force bundle invalidation on other workers
             self.env['ir.qweb'].clear_caches()
 
@@ -341,8 +357,7 @@ class AssetsBundle(object):
         # to invite the user to refresh their browser
         if self.env and 'bus.bus' in self.env and self.name in self.TRACKED_BUNDLES:
             self.env['bus.bus']._sendone('broadcast', 'bundle_changed', {
-                'name': self.name,
-                'version': self.version,
+                'server_version': release.version # Needs to be dynamically imported
             })
             _logger.debug('Asset Changed: bundle: %s -- version: %s', self.name, self.version)
 
@@ -538,7 +553,7 @@ class AssetsBundle(object):
 
     def is_css_preprocessed(self):
         preprocessed = True
-        old_attachments = self.env['ir.attachment']
+        old_attachments = self.env['ir.attachment'].sudo()
         asset_types = [SassStylesheetAsset, ScssStylesheetAsset, LessStylesheetAsset]
         if self.user_direction == 'rtl':
             asset_types.append(StylesheetAsset)
@@ -590,7 +605,7 @@ class AssetsBundle(object):
                 compiled = self.run_rtlcss(compiled)
 
             if not self.css_errors and old_attachments:
-                old_attachments.unlink()
+                self._unlink_attachments(old_attachments)
                 old_attachments = None
 
             fragments = self.rx_css_split.split(compiled)
@@ -653,8 +668,8 @@ class AssetsBundle(object):
                 rtlcss = misc.find_in_path('rtlcss.cmd')
             except IOError:
                 rtlcss = 'rtlcss'
-        cmd = [rtlcss, '-']
 
+        cmd = [rtlcss, '-c', get_resource_path("base", "data/rtlcss.json"), '-']
 
         try:
             rtlcss = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
@@ -692,7 +707,7 @@ class AssetsBundle(object):
         if 'Cannot load compass' in error:
             error += "Maybe you should install the compass gem using this extra argument:\n\n" \
                      "    $ sudo gem install compass --pre\n"
-        error += "This error occured while compiling the bundle '%s' containing:" % self.name
+        error += "This error occurred while compiling the bundle '%s' containing:" % self.name
         for asset in self.stylesheets:
             if isinstance(asset, PreprocessedCSS):
                 error += '\n    - %s' % (asset.url if asset.url else '<inline sass>')
@@ -701,7 +716,7 @@ class AssetsBundle(object):
     def get_rtlcss_error(self, stderr, source=None):
         """Improve and remove sensitive information from sass/less compilator error messages"""
         error = misc.ustr(stderr).split('Load paths')[0].replace('  Use --trace for backtrace.', '')
-        error += "This error occured while compiling the bundle '%s' containing:" % self.name
+        error += "This error occurred while compiling the bundle '%s' containing:" % self.name
         return error
 
 class WebAsset(object):
@@ -773,7 +788,7 @@ class WebAsset(object):
         try:
             self.stat()
             if self._filename:
-                with open(self._filename, 'rb') as fp:
+                with closing(file_open(self._filename, 'rb', filter_ext=EXTENSIONS)) as fp:
                     return fp.read().decode('utf-8')
             else:
                 return base64.b64decode(self._ir_attach['datas']).decode('utf-8')

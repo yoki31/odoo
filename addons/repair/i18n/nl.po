@@ -4,16 +4,18 @@
 # 
 # Translators:
 # Martin Trigaux, 2021
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2021
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2023
+# Jolien De Paepe, 2023
+# Manon Rondou, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 10:53+0000\n"
+"POT-Creation-Date: 2021-11-16 13:18+0000\n"
 "PO-Revision-Date: 2021-09-14 12:26+0000\n"
-"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>, 2021\n"
-"Language-Team: Dutch (https://www.transifex.com/odoo/teams/41243/nl/)\n"
+"Last-Translator: Manon Rondou, 2024\n"
+"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -73,9 +75,6 @@ msgid ""
 "    <p style=\"margin: 0px; padding: 0px;font-size: 13px;\">\n"
 "        Hello <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br/>\n"
 "        Here is your repair order <strong t-out=\"object.name or ''\">RO/00004</strong>\n"
-"        <t t-if=\"object.origin\">\n"
-"            (with reference: <t t-out=\"object.origin\"/> )\n"
-"        </t>\n"
 "        <t t-if=\"object.invoice_method != 'none'\">\n"
 "            amounting in <strong><t t-out=\"format_amount(object.amount_total, object.pricelist_id.currency_id) or ''\">$ 100.00</t>.</strong><br/>\n"
 "        </t>\n"
@@ -96,9 +95,6 @@ msgstr ""
 "    <p style=\"margin: 0px; padding: 0px;font-size: 13px;\">\n"
 "        Hallo <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,<br/>\n"
 "        Hier is je reparatieorder <strong t-out=\"object.name or ''\">RO/00004</strong>\n"
-"        <t t-if=\"object.origin\">\n"
-"            (met referentie: <t t-out=\"object.origin\"/> )\n"
-"        </t>\n"
 "        <t t-if=\"object.invoice_method != 'none'\">\n"
 "            voor het bedrag van <strong><t t-out=\"format_amount(object.amount_total, object.pricelist_id.currency_id) or ''\">$ 100.00</t>.</strong><br/>\n"
 "        </t>\n"
@@ -326,7 +322,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:repair.view_make_invoice
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form
 msgid "Create Invoice"
-msgstr "Maak factuur"
+msgstr "Factuur maken"
 
 #. module: repair
 #: model:ir.model,name:repair.model_repair_order_make_invoice
@@ -342,7 +338,7 @@ msgstr "Maak een nieuw label aan"
 #: model:ir.actions.act_window,name:repair.act_repair_invoice
 #: model_terms:ir.ui.view,arch_db:repair.view_make_invoice
 msgid "Create invoices"
-msgstr "Maak facturen"
+msgstr "Facturen maken"
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_fee__create_uid
@@ -422,7 +418,7 @@ msgstr "Wil je echt de factu(u)r(en) aanmaken?"
 #. module: repair
 #: model:ir.model.fields.selection,name:repair.selection__repair_line__state__done
 msgid "Done"
-msgstr "Gereed"
+msgstr "Afgehandeld"
 
 #. module: repair
 #: model:ir.model.fields.selection,name:repair.selection__repair_line__state__draft
@@ -482,12 +478,12 @@ msgstr "Toekomstige activiteiten"
 #. module: repair
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form_filter
 msgid "Group By"
-msgstr "Groepeer op"
+msgstr "Groeperen op"
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order_make_invoice__group
 msgid "Group by partner invoice address"
-msgstr "Groepeer op relatie factuuradres"
+msgstr "Groeperen op relatie factuuradres"
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order__has_message
@@ -1268,6 +1264,8 @@ msgid "Today Activities"
 msgstr "Activiteiten van vandaag"
 
 #. module: repair
+#: model:ir.model.fields,field_description:repair.field_repair_fee__price_total
+#: model:ir.model.fields,field_description:repair.field_repair_line__price_total
 #: model:ir.model.fields,field_description:repair.field_repair_order__amount_total
 msgid "Total"
 msgstr "Totaal"
@@ -1345,7 +1343,7 @@ msgstr "Maateenheid"
 #. module: repair
 #: model:ir.model.fields.selection,name:repair.selection__repair_order__priority__1
 msgid "Urgent"
-msgstr "Urgent"
+msgstr "Dringend"
 
 #. module: repair
 #: model:ir.model,name:repair.model_stock_warn_insufficient_qty_repair
@@ -1401,6 +1399,18 @@ msgid "You can not enter negative quantities."
 msgstr "Je mag geen negatieve waardes ingeven."
 
 #. module: repair
+#: code:addons/repair/models/repair.py:0
+#, python-format
+msgid "You cannot cancel a completed repair order."
+msgstr "Je kunt een voltooide reparatieorder niet annuleren."
+
+#. module: repair
+#: code:addons/repair/models/repair.py:0
+#, python-format
+msgid "You cannot delete a completed repair order."
+msgstr "Je kan een voltooide reparatieorder niet verwijderen."
+
+#. module: repair
 #: code:addons/repair/models/repair.py:0 code:addons/repair/models/repair.py:0
 #, python-format
 msgid ""
@@ -1429,8 +1439,6 @@ msgstr "{{ (object.name or '').replace('/','_') }}"
 #. module: repair
 #: model:mail.template,subject:repair.mail_template_repair_quotation
 msgid ""
-"{{ object.partner_id.name or '' }} Repair Orders (Ref {{ object.name or "
-"'n/a' }})"
+"{{ object.partner_id.name }} Repair Orders (Ref {{ object.name or 'n/a' }})"
 msgstr ""
-"{{ object.partner_id.name or '' }} Reperatieorders (Ref {{ object.name or "
-"'n/b' }})"
+"{{ object.partner_id.name }} Reparatieorder (Ref {{ object.name or 'n/b' }})"

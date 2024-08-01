@@ -4,6 +4,7 @@
 # 
 # Translators:
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Tony Ng, 2024
 # 
 msgid ""
 msgstr ""
@@ -11,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-12 07:49+0000\n"
 "PO-Revision-Date: 2021-09-14 12:25+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Tony Ng, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,6 +24,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:pos_epson_printer.pos_iot_config_view_form
 msgid "Cashdrawer"
 msgstr "收銀機"
+
+#. module: pos_epson_printer
+#. openerp-web
+#: code:addons/pos_epson_printer/static/src/js/printers.js:0
+#, python-format
+msgid ""
+"Check on the printer configuration for the 'Device ID' setting. It should be"
+" set to: "
+msgstr "請檢查打印機配置中的\"設備 ID\",應設置為："
 
 #. module: pos_epson_printer
 #. openerp-web
@@ -48,12 +58,19 @@ msgstr "Epson 收據印表機 IP 地址"
 msgid ""
 "If you are on a secure server (HTTPS) please make sure you manually accepted"
 " the certificate by accessing %s"
-msgstr "如果您使用的是安全伺服器 (HTTPS)，請確保您通過訪問 %s 手動接受了證書"
+msgstr "如果您使用的是安全伺服器 (HTTPS)，請確保您通過存取 %s 手動接受了證書"
 
 #. module: pos_epson_printer
 #: model:ir.model.fields,help:pos_epson_printer.field_pos_config__epson_printer_ip
 msgid "Local IP address of an Epson receipt printer."
 msgstr "Epson 收據印表機的本地 IP 地址."
+
+#. module: pos_epson_printer
+#. openerp-web
+#: code:addons/pos_epson_printer/static/src/js/printers.js:0
+#, python-format
+msgid "No paper was detected by the printer"
+msgstr "打印機偵測不到有紙張"
 
 #. module: pos_epson_printer
 #. openerp-web
@@ -87,3 +104,24 @@ msgid ""
 "The Epson receipt printer will be used instead of the receipt printer "
 "connected to the IoT Box."
 msgstr "將使用 Epson 收據印表機替换 IoT 收據印表機."
+
+#. module: pos_epson_printer
+#. openerp-web
+#: code:addons/pos_epson_printer/static/src/js/printers.js:0
+#, python-format
+msgid "The following error code was given by the printer:"
+msgstr "打印機提供了以下錯誤代碼:"
+
+#. module: pos_epson_printer
+#. openerp-web
+#: code:addons/pos_epson_printer/static/src/js/printers.js:0
+#, python-format
+msgid "The printer was successfully reached, but it wasn't able to print."
+msgstr "已成功連接打印機，但無法列印。"
+
+#. module: pos_epson_printer
+#. openerp-web
+#: code:addons/pos_epson_printer/static/src/js/printers.js:0
+#, python-format
+msgid "To find more details on the error reason, please search online for:"
+msgstr "若想了解錯誤原因的更多詳情，請在網上搜尋："

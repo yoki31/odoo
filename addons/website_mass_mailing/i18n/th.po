@@ -6,6 +6,7 @@
 # Martin Trigaux, 2021
 # Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2021
 # Wichanon Jamwutthipreecha, 2021
+# Rasareeyar Lappiam, 2023
 # 
 msgid ""
 msgstr ""
@@ -13,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-14 10:29+0000\n"
 "PO-Revision-Date: 2021-09-14 12:28+0000\n"
-"Last-Translator: Wichanon Jamwutthipreecha, 2021\n"
-"Language-Team: Thai (https://www.transifex.com/odoo/teams/41243/th/)\n"
+"Last-Translator: Rasareeyar Lappiam, 2023\n"
+"Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,28 +25,28 @@ msgstr ""
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options
 msgid ", .o_newsletter_popup"
-msgstr ""
+msgstr ", .o_newsletter_popup"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
 msgid "Always <b>First</b>."
-msgstr ""
+msgstr "เป็นอันดับ<b>แรก</b>เสมอ"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block
 msgid "Always First."
-msgstr ""
+msgstr "เป็นอันดับแรกเสมอ"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_block
 msgid "Be the first to find out all the latest news, products, and trends."
-msgstr ""
+msgstr "เป็นคนแรกที่ค้นพบข่าวสาร ผลิตภัณฑ์ และเทรนด์ล่าสุดทั้งหมด"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_popup
 msgid ""
 "Be the first to find out all the latest news,<br/> products, and trends."
-msgstr ""
+msgstr "เป็นคนแรกที่ค้นพบข่าวสารล่าสุดทั้งหมด<br/> ผลิตภัณฑ์และเทรนด์ล่าสุด"
 
 #. module: website_mass_mailing
 #. openerp-web
@@ -68,6 +69,13 @@ msgstr "ติดต่อ"
 
 #. module: website_mass_mailing
 #. openerp-web
+#: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.editor.js:0
+#, python-format
+msgid "Display Thanks Button"
+msgstr "แสดงปุ่มขอบคุณ"
+
+#. module: website_mass_mailing
+#. openerp-web
 #: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js:0
 #: code:addons/website_mass_mailing/static/src/js/website_mass_mailing.js:0
 #, python-format
@@ -87,6 +95,9 @@ msgid ""
 "No mailing list found, do you want to create a new one? This will save all "
 "your changes, are you sure you want to proceed?"
 msgstr ""
+"ไม่พบรายชื่อผู้เมล คุณต้องการสร้างใหม่หรือไม่? "
+"การดำเนินการนี้จะบันทึกการเปลี่ยนแปลงทั้งหมดของคุณ "
+"คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.newsletter_subscribe_options
@@ -96,7 +107,7 @@ msgstr "แสดงนโยบาย reCaptcha"
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "Subscribe"
-msgstr "เข้าร่วมการเป็นสมาชิก"
+msgstr "กดติดตาม"
 
 #. module: website_mass_mailing
 #. openerp-web
@@ -114,15 +125,15 @@ msgstr "กิจกรรมน่าสงสัยที่ตรวจพบ
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "Thanks"
-msgstr ""
+msgstr "ขอบคุณ"
 
 #. module: website_mass_mailing
 #: code:addons/website_mass_mailing/controllers/main.py:0
 #, python-format
 msgid "Thanks for subscribing!"
-msgstr ""
+msgstr "ขอบคุณสำหรับการกดติดตาม!"
 
 #. module: website_mass_mailing
 #: model_terms:ir.ui.view,arch_db:website_mass_mailing.s_newsletter_subscribe_form
 msgid "your email..."
-msgstr ""
+msgstr "อีเมลของคุณ..."

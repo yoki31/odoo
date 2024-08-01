@@ -4,7 +4,8 @@
 # 
 # Translators:
 # Martin Trigaux, 2021
-# Friederike Fasterling-Nesselbosch, 2021
+# Friederike Fasterling-Nesselbosch, 2022
+# Larissa Manderfeld, 2023
 # 
 msgid ""
 msgstr ""
@@ -12,8 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-08 06:19+0000\n"
 "PO-Revision-Date: 2021-09-14 12:24+0000\n"
-"Last-Translator: Friederike Fasterling-Nesselbosch, 2021\n"
-"Language-Team: German (https://www.transifex.com/odoo/teams/41243/de/)\n"
+"Last-Translator: Larissa Manderfeld, 2023\n"
+"Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,7 +24,7 @@ msgstr ""
 #. module: pos_coupon
 #: model:coupon.program,name:pos_coupon.15_pc_on_next_order
 msgid "15% on next order"
-msgstr ""
+msgstr "15% auf die nächste Bestellung"
 
 #. module: pos_coupon
 #: model:mail.template,body_html:pos_coupon.mail_coupon_template
@@ -206,6 +207,8 @@ msgstr ""
 msgid ""
 "A coupon from the same program has already been reserved for this order."
 msgstr ""
+"Ein Kupon aus demselben Programm wurde bereits für diese Bestellung "
+"reserviert."
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_program__promo_barcode
@@ -213,23 +216,25 @@ msgid ""
 "A technical field used as an alternative to the promo_code. This is "
 "automatically generated when promo_code is changed."
 msgstr ""
+"Ein technisches Feld, das als Alternative zum promo_code genutzt wird. Wird "
+"automatisch generiert wenn promo_code geändert wird."
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/xml/ActivePrograms.xml:0
 #, python-format
 msgid "Active Programs"
-msgstr ""
+msgstr "Aktive Programme"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_order__applied_program_ids
 msgid "Applied Programs"
-msgstr ""
+msgstr "Angewendete Programme"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_coupon__pos_order_id
 msgid "Applied on PoS Order"
-msgstr ""
+msgstr "Auf PoS-Auftrag angewendet"
 
 #. module: pos_coupon
 #. openerp-web
@@ -245,17 +250,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__promo_barcode
 #, python-format
 msgid "Barcode"
-msgstr "Strichcode"
+msgstr "Barcode"
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_barcode_rule
 msgid "Barcode Rule"
-msgstr "Strichcoderegel"
+msgstr "Barcoderegel"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_order__used_coupon_ids
 msgid "Consumed Coupons"
-msgstr ""
+msgstr "Eingelöste Kupons"
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_coupon_coupon
@@ -269,7 +274,7 @@ msgstr "Gutschein"
 #: code:addons/pos_coupon/static/src/xml/OrderReceipt.xml:0
 #, python-format
 msgid "Coupon Codes"
-msgstr ""
+msgstr "Gutscheincodes"
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_coupon_program
@@ -286,7 +291,7 @@ msgstr "Gutschein-Programme"
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_pos_order_line__coupon_id
 msgid "Coupon that generated this reward."
-msgstr ""
+msgstr "Kupon, der diese Belohnung generiert hat."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_config__use_coupon_programs
@@ -296,39 +301,43 @@ msgstr "Gutscheine und Werbeaktionen"
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_config__program_ids
 msgid "Coupons and Promotions"
-msgstr ""
+msgstr "Kupons und Promos"
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/js/ProductScreen.js:0
 #, python-format
 msgid "Deactivating program"
-msgstr ""
+msgstr "Programm wird deaktiviert"
 
 #. module: pos_coupon
 #: model_terms:ir.ui.view,arch_db:pos_coupon.pos_coupon_pos_config_view_form
 msgid "Define the coupon and promotion programs you can use in this PoS."
 msgstr ""
+"Definieren Sie die Gutschein- und Aktionsprogramme, die Sie an diesem "
+"Verkaufsort verwenden können."
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/xml/ControlButtons/PromoCodeButton.xml:0
 #, python-format
 msgid "Enter Code"
-msgstr ""
+msgstr "Code eingeben"
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/js/ControlButtons/PromoCodeButton.js:0
 #, python-format
 msgid "Enter Promotion or Coupon Code"
-msgstr ""
+msgstr "Geben Sie einen Promo- oder Kupon-Code ein"
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_pos_order_line__is_program_reward
 msgid ""
 "Flag indicating that this order line is a result of coupon/promo program."
 msgstr ""
+"Kennzeichen, das anzeigt, dass diese Auftragszeile das Ergebnis eines "
+"Coupons/Promo-Programms ist."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_order__generated_coupon_ids
@@ -338,7 +347,7 @@ msgstr "Erstellte Gutscheine"
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_order_line__is_program_reward
 msgid "Is reward line"
-msgstr ""
+msgstr "Ist Belohnungszeile"
 
 #. module: pos_coupon
 #. openerp-web
@@ -350,22 +359,22 @@ msgstr "Nein"
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_program__pos_order_line_ids
 msgid "Order lines where this program is applied."
-msgstr ""
+msgstr "Bestellzeilen, auf die dieses Programm angewendet wird."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__pos_order_count
 msgid "PoS Order Count"
-msgstr ""
+msgstr "PoS-Bestellungen Anzahl"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__pos_order_line_ids
 msgid "PoS Order Lines"
-msgstr ""
+msgstr "Auftragszeilen Kassensystem"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_coupon__source_pos_order_id
 msgid "PoS Order Reference"
-msgstr ""
+msgstr "PoS Auftragsreferenz"
 
 #. module: pos_coupon
 #: code:addons/pos_coupon/models/coupon_program.py:0
@@ -377,22 +386,22 @@ msgstr "PoS Aufträge"
 #: model_terms:ir.ui.view,arch_db:pos_coupon.pos_coupon_program_view_coupon_program_form
 #: model_terms:ir.ui.view,arch_db:pos_coupon.pos_coupon_program_view_promo_program_form
 msgid "PoS Sales"
-msgstr ""
+msgstr "PoS Verkäufe"
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_coupon__pos_order_id
 msgid "PoS order where this coupon is consumed/booked."
-msgstr ""
+msgstr "PoS-Auftrag, bei dem dieser Coupon eingelöst/gebucht wird."
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_coupon__source_pos_order_id
 msgid "PoS order where this coupon is generated."
-msgstr ""
+msgstr "PoS-Auftrag, bei dem dieser Coupon erzeugt wird."
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_pos_config
 msgid "Point of Sale Configuration"
-msgstr "Point Of Sale Konfiguration"
+msgstr "Kassensystem-Konfiguration"
 
 #. module: pos_coupon
 #: model:ir.model,name:pos_coupon.model_pos_order_line
@@ -407,7 +416,7 @@ msgstr "Point Of Sale Verkäufe"
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__pos_config_ids
 msgid "Point of Sales"
-msgstr "Kassenplätze"
+msgstr "Kassensystem"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__pos_order_ids
@@ -423,12 +432,12 @@ msgstr "Programm"
 #: code:addons/pos_coupon/models/pos_config.py:0
 #, python-format
 msgid "Program: %(name)s (%(type)s), Reward Product: `%(reward_product)s`"
-msgstr ""
+msgstr "Programm: %(name)s (%(type)s), Prämie: `%(reward_product)s`"
 
 #. module: pos_coupon
 #: model_terms:ir.ui.view,arch_db:pos_coupon.pos_coupon_pos_config_view_form
 msgid "Promotion & coupon programs to use."
-msgstr ""
+msgstr "Verfügbare Promo- und Coupon-Programme."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_pos_config__promo_program_ids
@@ -440,14 +449,14 @@ msgstr "Promo-Kampagnen"
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_pos_order_line__program_id
 msgid "Promotion/Coupon Program where this reward line is based."
-msgstr ""
+msgstr "Werbe-/Couponprogramm, auf dem diese Prämienzeile basiert."
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/xml/ControlButtons/ResetProgramsButton.xml:0
 #, python-format
 msgid "Reset Programs"
-msgstr ""
+msgstr "Programme zurücksetzen"
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_pos_order__applied_program_ids
@@ -455,27 +464,30 @@ msgid ""
 "Technical field. This is set when the order is validated. We normally get "
 "this value thru the `program_id` of the reward lines."
 msgstr ""
+"Technisches Feld. Dies wird bei der Validierung der Bestellung festgelegt. "
+"Normalerweise erhalten wir diesen Wert über die \"program_id\" der "
+"Prämienzeilen."
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_program__pos_order_ids
 msgid "The PoS orders where this program is applied."
-msgstr ""
+msgstr "Die PoS-Aufträge, auf die dieses Programm angewendet wird."
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_program__valid_partner_ids
 msgid "These are the partners that can avail this program."
-msgstr ""
+msgstr "Diese Partner können das Programm nutzen."
 
 #. module: pos_coupon
 #: model:ir.model.fields,help:pos_coupon.field_coupon_program__valid_product_ids
 msgid "These are the products that are valid in this program."
-msgstr ""
+msgstr "Dies sind die Produkte, die in diesem Programm gültig sind."
 
 #. module: pos_coupon
 #: code:addons/pos_coupon/models/pos_config.py:0
 #, python-format
 msgid "This coupon is invalid (%s)."
-msgstr ""
+msgstr "Dieser Kupon ist ungültig (%s)."
 
 #. module: pos_coupon
 #: code:addons/pos_coupon/models/pos_config.py:0
@@ -484,6 +496,8 @@ msgid ""
 "To continue, make the following reward products to be available in Point of "
 "Sale."
 msgstr ""
+"Um fortzufahren, machen Sie die folgenden Prämienprodukte im Kassensystem "
+"verfügbar."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_barcode_rule__type
@@ -494,16 +508,17 @@ msgstr "Typ"
 #: model:ir.model.fields,help:pos_coupon.field_pos_config__use_coupon_programs
 msgid "Use coupon and promotion programs in this PoS configuration."
 msgstr ""
+"Coupons und Promos in der Konfiguration dieses Kassensystems verwenden."
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__valid_partner_ids
 msgid "Valid Partner"
-msgstr ""
+msgstr "Gültiger Partner"
 
 #. module: pos_coupon
 #: model:ir.model.fields,field_description:pos_coupon.field_coupon_program__valid_product_ids
 msgid "Valid Product"
-msgstr ""
+msgstr "Gültiges Produkt"
 
 #. module: pos_coupon
 #. openerp-web
@@ -522,7 +537,7 @@ msgstr "Ja"
 #. module: pos_coupon
 #: model:mail.template,report_name:pos_coupon.mail_coupon_template
 msgid "Your Coupon Code"
-msgstr ""
+msgstr "Ihr Gutscheincode"
 
 #. module: pos_coupon
 #: model:mail.template,subject:pos_coupon.mail_coupon_template
@@ -532,11 +547,11 @@ msgstr "Ihr Prämiengutschein von {{ object.program_id.company_id.name }} "
 #. module: pos_coupon
 #: model:mail.template,name:pos_coupon.mail_coupon_template
 msgid "[POS] Coupon: Send by Email"
-msgstr ""
+msgstr "[POS] Kupon: Per E-Mail versenden"
 
 #. module: pos_coupon
 #. openerp-web
 #: code:addons/pos_coupon/static/src/xml/OrderReceipt.xml:0
 #, python-format
 msgid "no expiration"
-msgstr ""
+msgstr "kein Ablauf"

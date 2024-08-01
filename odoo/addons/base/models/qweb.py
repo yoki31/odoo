@@ -166,8 +166,10 @@ class QWeb(object):
         # error messages.
         _options['last_path_node'] = None
 
-        if not options.get('nsmap'):
-            _options['nsmap'] = {}
+        _options['nsmap'] = {
+            ns_prefix: str(ns_definition)
+            for ns_prefix, ns_definition in options.get('nsmap', {}).items()
+        }
 
         # generate code
 
@@ -295,7 +297,6 @@ class QWeb(object):
         globals_dict['Mapping'] = Mapping
         globals_dict['Markup'] = Markup
         globals_dict['escape'] = escape
-        globals_dict['type'] = type
         globals_dict['compile_options'] = options
         globals_dict.update(self._available_objects)
         return globals_dict
@@ -410,7 +411,7 @@ class QWeb(object):
             code += f'.format({", ".join(values)})'
         return code
 
-    def _compile_expr_tokens(self, tokens, allowed_keys, raise_on_missing=False):
+    def _compile_expr_tokens(self, tokens, allowed_keys, argument_names=None, raise_on_missing=False):
         """ Transform the list of token coming into a python instruction in
             textual form by adding the namepaces for the dynamic values.
 
@@ -436,6 +437,10 @@ class QWeb(object):
         index = 0
         open_bracket_index = -1
         bracket_depth = 0
+
+        argument_name = '_arg_%s__'
+        argument_names = argument_names or []
+
         while index < len(tokens):
             t = tokens[index]
             if t.exact_type in [token.LPAR, token.LSQB, token.LBRACE]:
@@ -449,7 +454,7 @@ class QWeb(object):
                     while i < len(tokens):
                         t = tokens[i]
                         if t.exact_type == token.NAME:
-                            allowed_keys.append(t.string)
+                            argument_names.append(t.string)
                         elif t.exact_type == token.COMMA:
                             pass
                         elif t.exact_type == token.COLON:
@@ -466,7 +471,7 @@ class QWeb(object):
                         if t.exact_type == token.NAME:
                             if t.string == 'in':
                                 break
-                            allowed_keys.append(t.string)
+                            argument_names.append(t.string)
                         elif t.exact_type in [token.COMMA, token.LPAR, token.RPAR]:
                             pass
                         else:
@@ -495,7 +500,12 @@ class QWeb(object):
             elif t.exact_type in [token.RPAR, token.RSQB, token.RBRACE]:
                 bracket_depth -= 1
                 if bracket_depth == 0:
-                    code = self._compile_expr_tokens(tokens[open_bracket_index + 1:index], list(allowed_keys), raise_on_missing)
+                    code = self._compile_expr_tokens(
+                        tokens[open_bracket_index + 1:index],
+                        list(allowed_keys),
+                        list(argument_names),
+                        raise_on_missing,
+                    )
                     code = tokens[open_bracket_index].string + code + t.string
                     tokens[open_bracket_index:index + 1] = [tokenize.TokenInfo(token.QWEB, code, tokens[open_bracket_index].start, t.end, '')]
                     index = open_bracket_index
@@ -526,7 +536,9 @@ class QWeb(object):
                     index += 1
                     while index < len(tokens):
                         t = tokens[index]
-                        if t.exact_type in [token.COMMA, token.NAME, token.COLON]:
+                        if t.exact_type == token.NAME and t.string in argument_names:
+                            code.append(argument_name % t.string)
+                        if t.exact_type in [token.COMMA, token.COLON]:
                             code.append(t.string)
                         if t.exact_type == token.COLON:
                             break
@@ -535,6 +547,8 @@ class QWeb(object):
                         pos = (t.end[0], 0)
                     else:
                         pos = t.end
+                elif string in argument_names:
+                    code.append(argument_name % t.string)
                 elif string in allowed_keys:
                     code.append(string)
                 elif index + 1 < len(tokens) and tokens[index + 1].exact_type == token.EQUAL: # function kw
@@ -562,20 +576,8 @@ class QWeb(object):
         return ''.join(code)
 
     def _compile_expr(self, expr, raise_on_missing=False):
-        """Transform string coming into a python instruction in textual form by
-        adding the namepaces for the dynamic values.
-        This method tokenize the string and call ``_compile_expr_tokens``
-        method.
-        """
-        readable = io.BytesIO(expr.strip().encode('utf-8'))
-        try:
-            tokens = list(tokenize.tokenize(readable.readline))
-        except tokenize.TokenError:
-            raise ValueError(f"Can not compile expression: {expr}")
-
-        expression = self._compile_expr_tokens(tokens, self._allowed_keyword + list(self._available_objects.keys()), raise_on_missing=raise_on_missing)
-
-        return f"({expression})"
+        """This method must be overridden by <ir.qweb> in order to compile the template."""
+        raise NotImplementedError("Templates should use the ir.qweb compile method")
 
     def _compile_bool(self, attr, default=False):
         """Convert the statements as a boolean."""
@@ -939,7 +941,10 @@ class QWeb(object):
         body = []
         if el.getchildren():
             for item in el:
-                if not isinstance(item, etree._Comment):
+                if isinstance(item, etree._Comment):
+                    if self.env.context.get('preserve_comments'):
+                        self._appendText("<!--%s-->" % item.text, options)
+                else:
                     body.extend(self._compile_node(item, options, indent))
                 # comments can also contains tail text
                 if item.tail is not None:
@@ -962,7 +967,7 @@ class QWeb(object):
         return compiled
 
     def _compile_directive_elif(self, el, options, indent):
-        """Compile `t-eif` expressions into a python code as a list of strings.
+        """Compile `t-elif` expressions into a python code as a list of strings.
 
         This method is linked with the `t-if` directive.
         The code will contain the compiled code of the element (without `else`
@@ -1048,7 +1053,7 @@ class QWeb(object):
                 {t_foreach} = {self._compile_expr(expr_foreach)} or []
                 if isinstance({t_foreach}, Sized):
                     values[{repr(expr_as + '_size')}] = {size} = len({t_foreach})
-                elif type({t_foreach}) == int:
+                elif ({t_foreach}).__class__ == int:
                     values[{repr(expr_as + '_size')}] = {size} = {t_foreach}
                     {t_foreach} = range({size})
                 else:
@@ -1184,7 +1189,8 @@ class QWeb(object):
         code_options = self._compile_directive(el, options, 'options', indent) or [self._indent("t_field_t_options = {}", indent)]
         code.extend(code_options)
         code.append(self._indent(f"attrs, content, force_display = self._get_field({self._compile_expr(record, raise_on_missing=True)}, {repr(field_name)}, {repr(expression)}, {repr(tagName)}, t_field_t_options, compile_options, values)", indent))
-        code.append(self._indent("content = self._compile_to_str(content)", indent))
+        code.append(self._indent("if content is not None and content is not False:", indent))
+        code.append(self._indent("content = self._compile_to_str(content)", indent + 1))
         code.extend(self._compile_widget_value(el, options, indent))
         return code
 
@@ -1211,6 +1217,7 @@ class QWeb(object):
             options['_text_concat'].clear()
             code.append(self._indent("else:", indent))
             code.extend(self._compile_tag_open(el, options, indent + 1, not without_attributes))
+            code.extend(self._flushText(options, indent + 1))
             code.extend(default_body)
             options['_text_concat'].extend(_text_concat)
             code.extend(self._compile_tag_close(el, options))
@@ -1218,7 +1225,7 @@ class QWeb(object):
         else:
             content = (self._compile_tag_open(el, options, indent + 1, not without_attributes) +
                 self._compile_tag_close(el, options) +
-                self._flushText(options, indent + 2))
+                self._flushText(options, indent + 1))
             if content:
                 code.append(self._indent("elif force_display:", indent))
                 code.extend(content)

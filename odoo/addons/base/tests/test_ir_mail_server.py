@@ -3,11 +3,16 @@
 
 from unittest.mock import patch
 
+from odoo import tools
+from odoo.addons.base.tests import test_mail_examples
 from odoo.addons.base.tests.common import MockSmtplibCase
+from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
+from odoo.tools import config
 
 
+@tagged('mail_server')
 class TestIrMailServer(TransactionCase, MockSmtplibCase):
 
     def setUp(self):
@@ -48,6 +53,41 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         ]
         for email, from_filter in tests:
             self.assertFalse(match_from_filter(email, from_filter))
+
+    def test_mail_body(self):
+        bodies = [
+            'content',
+            '<p>content</p>',
+            '<head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"></head><body><p>content</p></body>',
+            test_mail_examples.MISC_HTML_SOURCE,
+            test_mail_examples.QUOTE_THUNDERBIRD_HTML,
+        ]
+        expected_list = [
+            'content',
+            'content',
+            'content',
+            "test1\n*test2*\ntest3\ntest4\ntest5\ntest6   test7\ntest8    test9\ntest10\ntest11\ntest12\ngoogle [1]\ntest link [2]\n\n\n[1] http://google.com\n[2] javascript:alert('malicious code')",
+            'On 01/05/2016 10:24 AM, Raoul\nPoilvache wrote:\n\n* Test reply. The suite. *\n\n--\nRaoul Poilvache\n\nTop cool !!!\n\n--\nRaoul Poilvache',
+        ]
+        for body, expected in zip(bodies, expected_list):
+            message = self.env['ir.mail_server'].build_email(
+                'john.doe@from.example.com',
+                'destinataire@to.example.com',
+                body=body,
+                subject='Subject',
+                subtype='html',
+            )
+            body_alternative = False
+            for part in message.walk():
+                if part.get_content_maintype() == 'multipart':
+                    continue  # skip container
+                if part.get_content_type() == 'text/plain':
+                    if not part.get_payload():
+                        continue
+                    body_alternative = tools.ustr(part.get_content())
+                    # remove ending new lines as it just adds noise
+                    body_alternative = body_alternative.strip('\n')
+            self.assertEqual(body_alternative, expected)
 
     @mute_logger('odoo.models.unlink')
     def test_mail_server_priorities(self):
@@ -104,7 +144,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
             self.assertEqual(mail_server.from_filter, False, 'No notifications email set, must be forced to spoof the FROM')
             self.assertEqual(mail_from, 'test@unknown_domain.com')
 
-    @mute_logger('odoo.models.unlink')
+    @mute_logger('odoo.models.unlink', 'odoo.addons.base.models.ir_mail_server')
     def test_mail_server_send_email(self):
         IrMailServer = self.env['ir.mail_server']
         default_bounce_adress = self.env['ir.mail_server']._get_default_bounce_address()
@@ -132,7 +172,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
 
         self.assert_email_sent_smtp(
             smtp_from='notifications@test.com',
-            message_from='"Name (test@unknown_domain.com)" <notifications@test.com>',
+            message_from='"Name" <notifications@test.com>',
             from_filter='notifications@test.com',
         )
 
@@ -145,7 +185,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
 
         self.assert_email_sent_smtp(
             smtp_from='notifications@test.com',
-            message_from='"test@unknown_domain.com" <notifications@test.com>',
+            message_from='"test" <notifications@test.com>',
             from_filter='notifications@test.com',
         )
 
@@ -179,11 +219,12 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
 
         self.assert_email_sent_smtp(
             smtp_from=default_bounce_adress,
-            message_from='"Name (test@unknown_domain.com)" <notifications@test.com>',
+            message_from='"Name" <notifications@test.com>',
             from_filter='test.com',
         )
 
         # Test that the mail from / recipient envelop are encoded using IDNA
+        self.server_domain.from_filter = 'ééééééé.com'
         self.env['ir.config_parameter'].sudo().set_param('mail.catchall.domain', 'ééééééé.com')
         with self.mock_smtplib_connection():
             message = self._build_email(mail_from='test@ééééééé.com')
@@ -195,7 +236,51 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
             smtp_from='bounce@xn--9caaaaaaa.com',
             smtp_to_list=['dest@xn--example--i1a.com'],
             message_from='test@=?utf-8?b?w6nDqcOpw6nDqcOpw6k=?=.com',
-            from_filter=False,
+            from_filter='ééééééé.com',
+        )
+
+        # Test the case when the "mail.default.from" contains a full email address and not just the local part
+        # the domain of this default email address can be different than the catchall domain
+        self.env['ir.config_parameter'].sudo().set_param('mail.default.from', 'test@custom_domain.com')
+        self.server_default.from_filter = 'custom_domain.com'
+
+        with self.mock_smtplib_connection():
+            message = self._build_email(mail_from='"Name" <test@unknown_domain.com>')
+            IrMailServer.send_email(message)
+
+        self.assert_email_sent_smtp(
+            smtp_from='test@custom_domain.com',
+            smtp_to_list=['dest@xn--example--i1a.com'],
+            message_from='"Name" <test@custom_domain.com>',
+            from_filter='custom_domain.com',
+        )
+
+        # Test when forcing the mail server and when smtp_encryption is "starttls"
+        self.server_domain.smtp_encryption = "starttls"
+        self.server_domain.from_filter = "test.com"
+        with self.mock_smtplib_connection():
+            message = self._build_email(mail_from='specific_user@test.com')
+            IrMailServer.send_email(message, mail_server_id=self.server_domain.id)
+
+        self.connect_mocked.assert_called_once()
+        self.assert_email_sent_smtp(
+            smtp_from='specific_user@test.com',
+            message_from='specific_user@test.com',
+            from_filter='test.com',
+        )
+
+        # miss-configured database, no mail servers from filter
+        # match the user / notification email
+        self.env['ir.mail_server'].search([]).from_filter = "random.domain"
+        with self.mock_smtplib_connection():
+            message = self._build_email(mail_from='specific_user@test.com')
+            IrMailServer.send_email(message)
+
+        self.connect_mocked.assert_called_once()
+        self.assert_email_sent_smtp(
+            smtp_from='test@custom_domain.com',
+            message_from='"specific_user" <test@custom_domain.com>',
+            from_filter='random.domain',
         )
 
     @mute_logger('odoo.models.unlink')
@@ -230,7 +315,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.connect_mocked.assert_called_once()
         self.assert_email_sent_smtp(
             smtp_from='notifications@test.com',
-            message_from='"Name (test@unknown_domain.com)" <notifications@test.com>',
+            message_from='"Name" <notifications@test.com>',
             from_filter='notifications@test.com',
         )
 
@@ -262,12 +347,12 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.connect_mocked.assert_called_once()
         self.assert_email_sent_smtp(
             smtp_from=default_bounce_adress,
-            message_from='"Name (test@unknown_domain.com)" <notifications@test.com>',
+            message_from='"Name" <notifications@test.com>',
             from_filter='test.com',
         )
 
     @mute_logger('odoo.models.unlink')
-    @patch.dict("odoo.tools.config.options", {"from_filter": "test.com"})
+    @patch.dict(config.options, {"from_filter": "test.com"})
     def test_mail_server_binary_arguments_domain(self):
         """Test the configuration provided in the odoo-bin arguments.
 
@@ -314,12 +399,12 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.connect_mocked.assert_called_once()
         self.assert_email_sent_smtp(
             smtp_from=default_bounce_adress,
-            message_from='"test@unknown_domain.com" <notifications@test.com>',
+            message_from='"test" <notifications@test.com>',
             from_filter='test.com',
         )
 
     @mute_logger('odoo.models.unlink')
-    @patch.dict("odoo.tools.config.options", {"from_filter": "test.com"})
+    @patch.dict(config.options, {"from_filter": "test.com"})
     def test_mail_server_binary_arguments_domain_smtp_session(self):
         """Test the configuration provided in the odoo-bin arguments.
 
@@ -357,6 +442,31 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.connect_mocked.assert_called_once()
         self.assert_email_sent_smtp(
             smtp_from=default_bounce_adress,
-            message_from='"test@unknown_domain.com" <notifications@test.com>',
+            message_from='"test" <notifications@test.com>',
             from_filter='test.com',
+        )
+
+    @mute_logger('odoo.models.unlink')
+    @patch.dict(config.options, {'from_filter': 'test.com'})
+    def test_mail_server_mail_default_from_filter(self):
+        """Test that the config parameter "mail.default.from_filter" overwrite the odoo-bin
+        argument "--from-filter"
+        """
+        self.env['ir.config_parameter'].sudo().set_param('mail.default.from_filter', 'example.com')
+
+        IrMailServer = self.env['ir.mail_server']
+
+        # Remove all mail server so we will use the odoo-bin arguments
+        IrMailServer.search([]).unlink()
+        self.assertFalse(IrMailServer.search([]))
+
+        # Use an email in the domain of the config parameter "mail.default.from_filter"
+        with self.mock_smtplib_connection():
+            message = self._build_email(mail_from='specific_user@example.com')
+            IrMailServer.send_email(message)
+
+        self.assert_email_sent_smtp(
+            smtp_from='specific_user@example.com',
+            message_from='specific_user@example.com',
+            from_filter='example.com',
         )
