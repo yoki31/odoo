@@ -3,6 +3,12 @@ import os
 import astroid
 from pylint import checkers, interfaces
 
+try:
+    from pylint.checkers.utils import only_required_for_messages
+except ImportError:
+    from pylint.checkers.utils import check_messages as only_required_for_messages
+
+
 DFTL_CURSOR_EXPR = [
     'self.env.cr', 'self._cr',  # new api
     'self.cr',  # controllers and test
@@ -11,7 +17,11 @@ DFTL_CURSOR_EXPR = [
 
 
 class OdooBaseChecker(checkers.BaseChecker):
-    __implements__ = interfaces.IAstroidChecker
+    try: # TODO, remove once pylint minimal version is 3.0.0
+        __implements__ = interfaces.IAstroidChecker
+        # see https://github.com/pylint-dev/pylint/commit/358264aaf622505f6d2e8bc699618382981a078c
+    except AttributeError:
+        pass
     name = 'odoo'
 
     msgs = {
@@ -55,6 +65,11 @@ class OdooBaseChecker(checkers.BaseChecker):
         )
 
     def _check_concatenation(self, node):
+        node = self.resolve(node)
+
+        if self._allowable(node):
+            return False
+
         if isinstance(node, astroid.BinOp) and node.op in ('%', '+'):
             if isinstance(node.right, astroid.Tuple):
                 # execute("..." % (self._table, thing))
@@ -80,23 +95,35 @@ class OdooBaseChecker(checkers.BaseChecker):
             #       right=Const(value=' FROM table')),
             #    right=Const(value='WHERE'))
             # Notice that left node is another BinOp node
-            return not self._allowable(node.left) and self._check_concatenation(node.left)
+            return self._check_concatenation(node.left)
 
         # check execute("...".format(self._table, table=self._table))
         if isinstance(node, astroid.Call) \
                 and isinstance(node.func, astroid.Attribute) \
                 and node.func.attrname == 'format':
 
-            if not all(map(self._allowable, node.args or [])):
-                return True
+            return not (
+                    all(map(self._allowable, node.args or []))
+                and all(self._allowable(keyword.value) for keyword in (node.keywords or []))
+            )
 
-            if not all(
-                self._allowable(keyword.value)
-                for keyword in (node.keywords or [])
-            ):
-                return True
+        # check execute(f'foo {...}')
+        if isinstance(node, astroid.JoinedStr):
+            return not all(
+                self._allowable(formatted.value)
+                for formatted in node.nodes_of_class(astroid.FormattedValue)
+            )
 
-        return False
+    def resolve(self, node):
+        # if node is a variable, find how it was built
+        if isinstance(node, astroid.Name):
+            for target in node.lookup(node.name)[1]:
+                # could also be e.g. arguments (if the source is a function parameter)
+                if isinstance(target.parent, astroid.Assign):
+                    # FIXME: handle multiple results (e.g. conditional assignment)
+                    return target.parent.value
+        # otherwise just return the original node for checking
+        return node
 
     def _check_sql_injection_risky(self, node):
         # Inspired from OCA/pylint-odoo project
@@ -116,28 +143,14 @@ class OdooBaseChecker(checkers.BaseChecker):
         ):
             return False
         first_arg = node.args[0]
+
         is_concatenation = self._check_concatenation(first_arg)
-        # if first parameter is a variable, check how it was built instead
-        if (not is_concatenation and isinstance(first_arg, (astroid.Name, astroid.Subscript))):
+        if is_concatenation is not None:
+            return is_concatenation
 
-            # 1) look for parent scope (where the definition lives)
-            current = node
-            while (current and not isinstance(current.parent, astroid.FunctionDef)):
-                current = current.parent
-            if not current:
-                return is_concatenation
-            parent = current.parent
+        return True
 
-            # 2) check how was the variable built
-            for node_assign in parent.nodes_of_class(astroid.Assign):
-                if node_assign.targets[0].as_string() != first_arg.as_string():
-                    continue
-                is_concatenation = self._check_concatenation(node_assign.value)
-                if is_concatenation:
-                    break
-        return is_concatenation
-
-    @checkers.utils.check_messages('sql-injection')
+    @only_required_for_messages('sql-injection')
     def visit_call(self, node):
         if self._check_sql_injection_risky(node):
             self.add_message('sql-injection', node=node)

@@ -4,15 +4,17 @@
 # 
 # Translators:
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Tony Ng, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 10:54+0000\n"
+"POT-Creation-Date: 2024-08-14 15:43+0000\n"
 "PO-Revision-Date: 2021-09-14 12:26+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -35,17 +37,19 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"<p class=\"o_view_nocontent_smiling_face\">\n"
-" 記錄時程表 </p><p>\n"
-" 您可以每天按專案註冊和跟蹤工作時間。每\n"
-"次花費在專案上的時間都將成為成本, \n"
-"如果需要, 可以向客戶重新開立應收憑單。\n"
-"                </p>"
+"                <p class=\"o_view_nocontent_smiling_face\">\n"
+"                    記錄工時表\n"
+"                </p><p>\n"
+"                    你可按個別專案項目，登記並追蹤你每天的工作時間。\n"
+"                    任何花費在專案的工作時間，都會成為成本，並可按需要\n"
+"                    重新向客戶開立發票。\n"
+"                </p>\n"
+"            "
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_invoice___candidate_orders
 msgid " Candidate Orders"
-msgstr ""
+msgstr "候選訂單"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_project__billable_percentage
@@ -93,9 +97,7 @@ msgstr "<em class=\"font-weight-normal text-muted\">銷售訂單的工時表：<
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\"/>"
-msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
-"title=\"Arrow\"/>"
+msgstr "<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"箭嘴圖示\" title=\"箭嘴\"/>"
 
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.res_config_settings_view_form
@@ -165,6 +167,7 @@ msgstr ""
 " - 庫存變動：數量來自已確認的庫存移動\n"
 
 #. module: sale_timesheet
+#: model:account.analytic.account,name:sale_timesheet.account_analytic_account_project_support
 #: model:project.project,name:sale_timesheet.project_support
 msgid "After-Sales Services"
 msgstr "售後服務"
@@ -207,7 +210,7 @@ msgstr "待開立應收憑單金額"
 msgid ""
 "An employee cannot be selected more than once in the mapping. Please remove "
 "duplicate(s) and try again."
-msgstr "在一個映射中不能多次選擇同一個僱員，請刪除重複項再試."
+msgstr "在一個對應操作中不能多次選擇同一個員工，請刪除重複項再試."
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_profitability_report__analytic_account_id
@@ -365,22 +368,22 @@ msgstr "成本和收入"
 #: model:ir.actions.act_window,name:sale_timesheet.project_project_action_multi_create_invoice
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_create_invoice_view_form
 msgid "Create Invoice"
-msgstr "創建應收憑單"
+msgstr "建立應收憑單"
 
 #. module: sale_timesheet
 #: model:ir.model,name:sale_timesheet.model_project_create_invoice
 msgid "Create Invoice from project"
-msgstr "從專案創建應收憑單"
+msgstr "從專案建立應收憑單"
 
 #. module: sale_timesheet
 #: model:ir.model,name:sale_timesheet.model_project_create_sale_order_line
 msgid "Create SO Line from project"
-msgstr "從專案創建銷售訂單項目"
+msgstr "從專案建立銷售訂單項目"
 
 #. module: sale_timesheet
 #: model:ir.model,name:sale_timesheet.model_project_create_sale_order
 msgid "Create SO from project"
-msgstr "從專案創建銷售訂單"
+msgstr "從專案建立銷售訂單"
 
 #. module: sale_timesheet
 #. openerp-web
@@ -390,18 +393,18 @@ msgstr "從專案創建銷售訂單"
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_project_view_form
 #, python-format
 msgid "Create Sales Order"
-msgstr "創建銷售訂單"
+msgstr "建立銷售訂單"
 
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_create_invoice_view_form
 msgid "Create Sales Order from Project"
-msgstr "在專案上創建銷售訂單"
+msgstr "在專案上建立銷售訂單"
 
 #. module: sale_timesheet
 #: model:ir.actions.act_window,name:sale_timesheet.project_project_action_multi_create_sale_order
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_create_sale_order_view_form
 msgid "Create a Sales Order"
-msgstr "創建銷售訂單"
+msgstr "建立銷售訂單"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_invoice__create_uid
@@ -444,7 +447,7 @@ msgstr "客戶服務（預付費時間）"
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_project_view_kanban_inherit_sale_timesheet
 msgid "Customer Ratings"
-msgstr "客戶點評"
+msgstr "客戶評分"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_create_sale_order__partner_id
@@ -480,7 +483,7 @@ msgstr "預設服務"
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_project__display_create_order
 msgid "Display Create Order"
-msgstr "顯示創建訂單"
+msgstr "顯示建立訂單"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_invoice__display_name
@@ -537,7 +540,7 @@ msgstr "固定價格服務"
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.project_profitability_report_view_search
 msgid "Group By"
-msgstr "分組按"
+msgstr "分組依據"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_sale_order_line__has_displayed_warning_upsell
@@ -547,7 +550,7 @@ msgstr "已顯示警告追加銷售"
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_task__has_multi_sol
 msgid "Has Multi Sol"
-msgstr ""
+msgstr "有多個銷售訂單資料行"
 
 #. module: sale_timesheet
 #: model:product.product,uom_name:sale_timesheet.product_service_deliver_timesheet_1
@@ -560,6 +563,16 @@ msgstr ""
 #: model:product.template,uom_name:sale_timesheet.time_product_product_template
 msgid "Hours"
 msgstr "小時"
+
+#. module: sale_timesheet
+#: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_my_timesheets_inherit
+msgid "Hours Ordered,"
+msgstr "小時已訂購,"
+
+#. module: sale_timesheet
+#: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_my_timesheets_inherit
+msgid "Hours Remaining)"
+msgstr "小時剩餘可用）"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_invoice__id
@@ -582,7 +595,7 @@ msgstr "進行中"
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_sale_order__info_invoice
 msgid "Info Invoice"
-msgstr ""
+msgstr "資訊發票"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/controllers/portal.py:0
@@ -603,7 +616,7 @@ msgstr "開立憑單政策"
 msgid ""
 "Invoice based on timesheets (delivered quantity) on projects or tasks you'll"
 " create later on."
-msgstr "基於您稍後將創建的專案或任務的時間表（交付數量）。"
+msgstr "基於您稍後將建立的專案或任務的時間表（交付數量）。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/product.py:0
@@ -611,7 +624,7 @@ msgstr "基於您稍後將創建的專案或任務的時間表（交付數量）
 msgid ""
 "Invoice based on timesheets (delivered quantity), and create a project for "
 "the order with a task for each sales order line to track the time spent."
-msgstr "根據工時表（交貨數量）開立憑單，並為訂單創建一個專案，每個銷售訂單明細都有一個任務來追蹤花費的時間。"
+msgstr "根據工時表（交貨數量）開立憑單，並為訂單建立一個專案，每個銷售訂單明細都有一個任務來追蹤花費的時間。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/product.py:0
@@ -619,7 +632,7 @@ msgstr "根據工時表（交貨數量）開立憑單，並為訂單創建一個
 msgid ""
 "Invoice based on timesheets (delivered quantity), and create a task in an "
 "existing project to track the time spent."
-msgstr "根據工時表（交付數量）開立憑單，並在現有專案中創建任務以追蹤花費的時間。"
+msgstr "根據工時表（交付數量）開立憑單，並在現有專案中建立任務以追蹤花費的時間。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/product.py:0
@@ -627,12 +640,12 @@ msgstr "根據工時表（交付數量）開立憑單，並在現有專案中創
 msgid ""
 "Invoice based on timesheets (delivered quantity), and create an empty "
 "project for the order to track the time spent."
-msgstr "根據工時表（交貨數量）開立憑單，並為訂單創建一個新專案以追蹤花費的時間。"
+msgstr "根據工時表（交貨數量）開立憑單，並為訂單建立一個新專案以追蹤花費的時間。"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_account_analytic_line__timesheet_invoice_id
 msgid "Invoice created from the timesheet"
-msgstr "根據工時表創建的應收憑單"
+msgstr "根據工時表建立的應收憑單"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_project__allow_billable
@@ -741,9 +754,9 @@ msgid ""
 "Timesheets on contract: Invoice based on the tracked hours on the related timesheet.\n"
 "Create a task and track hours: Create a task on the sales order validation and track the work hours."
 msgstr ""
-"手動設定訂單數量：根據手動輸入數量的應收憑單，不創建分析帳戶。\n"
-"工時表：在合同的基礎上對相關應收憑單追蹤小時工時表。\n"
-"創建任務和追蹤時間：在銷售訂單驗證上創建任務並追蹤工作時間。"
+"手動設定訂單數量：根據手動輸入數量的應收憑單，不建立分析帳戶。\n"
+"工時表：在合約的基礎上對相關應收憑單追蹤小時工時表。\n"
+"建立任務和追蹤時間：在銷售訂單驗證上建立任務並追蹤工作時間。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/project.py:0
@@ -780,7 +793,7 @@ msgstr "未找到任何活動"
 #. module: sale_timesheet
 #: model_terms:ir.actions.act_window,help:sale_timesheet.timesheet_action_billing_report
 msgid "No data yet!"
-msgstr "暫無數據！"
+msgstr "暫無資料！"
 
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.timesheet_view_search
@@ -821,11 +834,6 @@ msgstr "不支援該操作"
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_analytic_line__order_id
 msgid "Order Reference"
 msgstr "訂單關聯"
-
-#. module: sale_timesheet
-#: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_my_timesheets_inherit
-msgid "Ordered,"
-msgstr "已訂購,"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_profitability_report__expense_cost
@@ -951,7 +959,7 @@ msgstr "專案更新"
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_create_sale_order__project_id
 msgid "Project for which we are creating a sales order"
-msgstr "我們正在為其創建銷售訂單的專案"
+msgstr "我們正在為其建立銷售訂單的專案"
 
 #. module: sale_timesheet
 #: model:ir.model.fields.selection,name:sale_timesheet.selection__project_project__pricing_type__fixed_rate
@@ -967,7 +975,7 @@ msgstr "專案進行計費"
 #: code:addons/sale_timesheet/models/project.py:0
 #, python-format
 msgid "Rating"
-msgstr "點評"
+msgstr "評分"
 
 #. module: sale_timesheet
 #: model:project.task,legend_done:sale_timesheet.project_task_1
@@ -1014,11 +1022,6 @@ msgstr "SO 剩餘時間"
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_timesheet_table_inherit
 msgid "Remaining Hours on SO:"
 msgstr "SO 剩餘時間:"
-
-#. module: sale_timesheet
-#: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_my_timesheets_inherit
-msgid "Remaining)"
-msgstr "剩餘)"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/project.py:0
@@ -1107,7 +1110,7 @@ msgid ""
 "Sales order lines define milestones of the project to invoice by setting the"
 " delivered quantity. Create a project for the order with a task for each "
 "sales order line to track the time spent."
-msgstr "銷售訂單明細通過設置交付數量來定義要開立憑單的專案里程碑。為訂單創建一個新專案，為每個銷售訂單行創建一個任務來追蹤花費的時間。"
+msgstr "銷售訂單明細通過設置交付數量來定義要開立憑單的專案里程碑。為訂單建立一個新專案，為每個銷售訂單行建立一個任務來追蹤花費的時間。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/product.py:0
@@ -1116,7 +1119,7 @@ msgid ""
 "Sales order lines define milestones of the project to invoice by setting the"
 " delivered quantity. Create a task in an existing project to track the time "
 "spent."
-msgstr "銷售訂單明細通過設置交付數量來定義要開票的專案里程碑。在現有專案中創建任務以追蹤花費的時間。"
+msgstr "銷售訂單明細通過設置交付數量來定義要開票的專案里程碑。在現有專案中建立任務以追蹤花費的時間。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/models/product.py:0
@@ -1125,7 +1128,7 @@ msgid ""
 "Sales order lines define milestones of the project to invoice by setting the"
 " delivered quantity. Create an empty project for the order to track the time"
 " spent."
-msgstr "銷售訂單明細通過設置交付數量來定義要開立憑單的專案里程碑。為訂單創建一個新專案來追踪花費的時間。"
+msgstr "銷售訂單明細通過設置交付數量來定義要開立憑單的專案里程碑。為訂單建立一個新專案來追踪花費的時間。"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_task__sale_order_id
@@ -1172,12 +1175,12 @@ msgstr "選擇可以在其上建立任務的可計費專案。 必須為每個�
 msgid ""
 "Select a billable project to be the skeleton of the new created project when"
 " selling the current product. Its stages and tasks will be duplicated."
-msgstr "在銷售當前產品時，選擇一個可計費專案作為新建立專案的框架。 它的階段和任務將重複。"
+msgstr "在銷售當前產品時，選擇一個可計費專案作為新增專案的框架。 它的階段和任務將重複。"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_sale_order__project_id
 msgid "Select a non billable project on which tasks can be created."
-msgstr "選擇可以創建任務的不可計費專案。"
+msgstr "選擇可以建立任務的不可計費專案。"
 
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.res_config_settings_view_form
@@ -1288,7 +1291,7 @@ msgstr "任務"
 msgid ""
 "The %s product is required by the Timesheets app and cannot be archived nor "
 "deleted."
-msgstr "%s 產品是 Timesheets 應用程序所必需的，無法存檔或刪除。"
+msgstr "%s 產品是 Timesheets 模組所必需的，無法存檔或刪除。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/wizard/project_create_sale_order.py:0
@@ -1297,8 +1300,8 @@ msgid ""
 "The Sales Order cannot be created because you did not enter some employees that entered timesheets on this project. Please list all the relevant employees before creating the Sales Order.\n"
 "Missing employee(s): %s"
 msgstr ""
-"無法創建銷售訂單，因為您沒有輸入此專案上產生工時表的某些員工。創建銷售訂單前，請列出所有相關員工。\n"
-"缺失員工：%s"
+"無法建立銷售訂單，因為您沒有輸入此專案上產生工時表的某些員工。建立銷售訂單前，請列出所有相關員工。\n"
+"缺少員工：%s"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,help:sale_timesheet.field_project_task__so_analytic_account_id
@@ -1328,7 +1331,7 @@ msgstr "該專案已連結到銷售訂單專案。"
 msgid ""
 "The sales order cannot be created because some timesheets of this project "
 "are already linked to another sales order."
-msgstr "無法創建銷售訂單，因為該專案的某些工時表已經連接到另一個銷售訂單。"
+msgstr "無法建立銷售訂單，因為該專案的某些工時表已經連接到另一個銷售訂單。"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/wizard/project_create_invoice.py:0
@@ -1568,12 +1571,12 @@ msgstr "當完成的工作超過預計時數，提醒銷售人員注意追加SO�
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_project__warning_employee_rate
 msgid "Warning Employee Rate"
-msgstr ""
+msgstr "警告員工收費率"
 
 #. module: sale_timesheet
 #: model:ir.model.fields,field_description:sale_timesheet.field_project_create_sale_order_line__wizard_id
 msgid "Wizard"
-msgstr "視窗"
+msgstr "精靈"
 
 #. module: sale_timesheet
 #: code:addons/sale_timesheet/wizard/project_create_invoice.py:0

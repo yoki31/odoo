@@ -6,15 +6,17 @@
 # Martin Trigaux, 2021
 # sejun huang <sejun.huang@gmail.com>, 2021
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Wil Odoo, 2024
+# Tony Ng, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-08 07:16+0000\n"
+"POT-Creation-Date: 2024-08-14 15:43+0000\n"
 "PO-Revision-Date: 2021-09-14 12:27+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Tony Ng, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -50,7 +52,7 @@ msgstr "%s像素"
 msgid ""
 "'Alt tag' specifies an alternate text for an image, if the image cannot be "
 "displayed (slow connection, missing image, screen reader ...)."
-msgstr "如果無法顯示圖像，則「Alt tag」指定圖像的替代文本（連接速度慢，圖像丟失，螢幕閱讀器......）。"
+msgstr "如果無法顯示圖像，則「Alt tag」指定圖像的替代文本（連接速度慢，圖像遺失，螢幕閱讀器......）。"
 
 #. module: web_editor
 #. openerp-web
@@ -188,7 +190,7 @@ msgstr "<span>樣式</span>"
 msgid ""
 "A server error occured. Please check you correctly signed in and that the "
 "file you are saving is correctly formatted."
-msgstr "出現伺服器錯誤。請正確登錄，並正確保存您保存的文件。"
+msgstr "出現伺服器錯誤。請正確登入，並正確儲存您儲存的文件。"
 
 #. module: web_editor
 #. openerp-web
@@ -229,9 +231,31 @@ msgstr "新增一行"
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "Add URL"
 msgstr "添加網址"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Add a blockquote section."
+msgstr "加入引用文字區塊。"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Add a button."
+msgstr "加入按鈕。"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Add a code section."
+msgstr "加入程式碼段落。"
 
 #. module: web_editor
 #. openerp-web
@@ -249,6 +273,13 @@ msgstr "右側添加一列"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Add a link."
+msgstr "加入連結。"
+
+#. module: web_editor
+#. openerp-web
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #, python-format
 msgid "Add a row above"
@@ -260,13 +291,6 @@ msgstr "往上添加一行"
 #, python-format
 msgid "Add a row below"
 msgstr "往下添加一行"
-
-#. module: web_editor
-#. openerp-web
-#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
-#, python-format
-msgid "Add document"
-msgstr "添加文件"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -343,7 +367,7 @@ msgstr "動畫"
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "Apply"
-msgstr "應用"
+msgstr "套用"
 
 #. module: web_editor
 #. openerp-web
@@ -422,6 +446,14 @@ msgid "Background Position"
 msgstr "背景位置"
 
 #. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Basic blocks"
+msgstr "基本區塊"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
 msgid "Basics"
 msgstr "基礎"
@@ -436,7 +468,7 @@ msgstr "下方"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Blobs"
-msgstr ""
+msgstr "流體、油污效果"
 
 #. module: web_editor
 #. openerp-web
@@ -453,7 +485,7 @@ msgstr "Blocks & Rainy"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Blur"
-msgstr ""
+msgstr "模糊"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -493,6 +525,7 @@ msgstr "亮度"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #, python-format
@@ -546,6 +579,7 @@ msgstr "關閉"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #, python-format
 msgid "Code"
@@ -592,6 +626,13 @@ msgid "Confirmation"
 msgstr "確認"
 
 #. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Content conflict"
+msgstr ""
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Contrast"
 msgstr "對比"
@@ -627,7 +668,7 @@ msgstr "封面"
 #: code:addons/web_editor/static/src/js/editor/snippets.options.js:0
 #, python-format
 msgid "Create"
-msgstr "創建"
+msgstr "建立"
 
 #. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_web_editor_converter_test_sub__create_uid
@@ -698,7 +739,7 @@ msgstr "預設 + 圓角"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.colorpicker
 msgid "Define a custom gradient"
-msgstr "定義自定義漸層"
+msgstr "定義自訂漸層"
 
 #. module: web_editor
 #. openerp-web
@@ -732,12 +773,12 @@ msgstr "說明"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippets
 #, python-format
 msgid "Discard"
-msgstr "放棄"
+msgstr "取消"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippets
 msgid "Discard record"
-msgstr "放棄紀錄"
+msgstr "捨棄紀錄"
 
 #. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_web_editor_converter_test_sub__display_name
@@ -749,7 +790,7 @@ msgstr "顯示名稱"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "Do you want to install the %s App?"
-msgstr "您要安裝 %s 應用程序嗎？"
+msgstr "您要安裝 %s 模組嗎？"
 
 #. module: web_editor
 #. openerp-web
@@ -957,6 +998,13 @@ msgstr "字體大小"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
+#, python-format
+msgid "For technical reasons, this block cannot be dropped here"
+msgstr "由於技術原因，此方塊不可放置此處"
+
+#. module: web_editor
+#. openerp-web
 #: code:addons/web_editor/static/src/xml/ace.xml:0
 #, python-format
 msgid "Format"
@@ -980,6 +1028,7 @@ msgstr "通過在我們的免版權照片和插圖庫中搜索來獲得完美的
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #, python-format
 msgid "Gradient"
@@ -1038,13 +1087,6 @@ msgstr "標題6"
 #, python-format
 msgid "Hide Dailymotion logo"
 msgstr "隱藏Dailymotion標誌"
-
-#. module: web_editor
-#. openerp-web
-#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
-#, python-format
-msgid "Hide Youtube logo"
-msgstr "隱藏Youtube標誌"
 
 #. module: web_editor
 #. openerp-web
@@ -1144,7 +1186,7 @@ msgstr "如果您放棄目前的編輯，所有未儲存的更改都將消失。
 msgid ""
 "If you reset this file, all your customizations will be lost as it will be "
 "reverted to the default file."
-msgstr "如果您重置此文件，您的所有自定義將丟失，因為它將被還原為預設文件。"
+msgstr "如果您重置此文件，您的所有自訂將遺失，因為它將被還原為預設文件。"
 
 #. module: web_editor
 #. openerp-web
@@ -1156,6 +1198,7 @@ msgstr "插圖"
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 #, python-format
@@ -1177,7 +1220,7 @@ msgstr "圖片高度"
 #. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_ir_attachment__image_src
 msgid "Image Src"
-msgstr "Image Src"
+msgstr "圖片來源"
 
 #. module: web_editor
 #: model:ir.model.fields,field_description:web_editor.field_ir_attachment__image_width
@@ -1202,6 +1245,20 @@ msgstr "Inkwell"
 #, python-format
 msgid "Inline Text"
 msgstr "內嵌文本"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Insert a video."
+msgstr "插入影片"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Insert an image."
+msgstr "插入圖片。"
 
 #. module: web_editor
 #. openerp-web
@@ -1244,6 +1301,12 @@ msgstr "安裝 %s"
 #, python-format
 msgid "Install in progress"
 msgstr "安裝中"
+
+#. module: web_editor
+#: code:addons/web_editor/models/ir_ui_view.py:0
+#, python-format
+msgid "Invalid field value for %s: %s"
+msgstr "%s 的欄位值無效：%s"
 
 #. module: web_editor
 #. openerp-web
@@ -1318,6 +1381,7 @@ msgstr "明細列表"
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/js/wysiwyg/widgets/link.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #, python-format
 msgid "Link"
 msgstr "連結"
@@ -1374,6 +1438,14 @@ msgstr "媒體"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Medias"
+msgstr ""
+
+#. module: web_editor
+#. openerp-web
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
@@ -1387,7 +1459,7 @@ msgstr "媒體"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "More info about this app."
-msgstr "有關此應用程序的更多資訊。"
+msgstr "有關此模組的更多資訊。"
 
 #. module: web_editor
 #. openerp-web
@@ -1403,10 +1475,25 @@ msgstr "名稱"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
+#, python-format
+msgid "Navigation"
+msgstr "資訊存取"
+
+#. module: web_editor
+#. openerp-web
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "No"
 msgstr "否"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/widgets/link_popover_widget.js:0
+#, python-format
+msgid "No URL specified"
+msgstr "未設定網址"
 
 #. module: web_editor
 #. openerp-web
@@ -1427,7 +1514,7 @@ msgstr "找不到圖片。"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "No location to drop in"
-msgstr ""
+msgstr "無處可放置"
 
 #. module: web_editor
 #. openerp-web
@@ -1438,10 +1525,10 @@ msgstr "沒有更多記錄"
 
 #. module: web_editor
 #. openerp-web
-#: code:addons/web_editor/static/lib/odoo-editor/src/powerbox/Powerbox.js:0
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
-msgid "No results"
-msgstr "沒有結果"
+msgid "No pictograms found."
+msgstr "找不到象形圖示。"
 
 #. module: web_editor
 #. openerp-web
@@ -1460,7 +1547,7 @@ msgstr "無"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 #, python-format
 msgid "Normal"
-msgstr "一般"
+msgstr "正常"
 
 #. module: web_editor
 #. openerp-web
@@ -1489,7 +1576,7 @@ msgstr "僅視圖"
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "Open in a new tab"
-msgstr ""
+msgstr "以新分頁開啟"
 
 #. module: web_editor
 #. openerp-web
@@ -1513,7 +1600,7 @@ msgstr "原始(未優化、未調整大小)附件"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "Origins"
-msgstr ""
+msgstr "基本幾何圖形"
 
 #. module: web_editor
 #. openerp-web
@@ -1551,7 +1638,14 @@ msgstr "小圖片"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.colorpicker
 msgid "Position"
-msgstr "崗位"
+msgstr "位置"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
+#, python-format
+msgid "Preset #{number}"
+msgstr "預設設定 #{number}"
 
 #. module: web_editor
 #. openerp-web
@@ -1592,6 +1686,7 @@ msgstr "品質"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #, python-format
 msgid "Quote"
@@ -1605,7 +1700,7 @@ msgstr "Qweb"
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field
 msgid "Qweb Field"
-msgstr "Qweb字段"
+msgstr "Qweb欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_contact
@@ -1615,42 +1710,42 @@ msgstr "Qweb 聯絡人欄位"
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_date
 msgid "Qweb Field Date"
-msgstr "Qweb日期字段"
+msgstr "Qweb日期欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_datetime
 msgid "Qweb Field Datetime"
-msgstr "Qweb日期時間字段"
+msgstr "Qweb日期時間欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_duration
 msgid "Qweb Field Duration"
-msgstr "Qweb期間字段"
+msgstr "Qweb期間欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_float
 msgid "Qweb Field Float"
-msgstr "Qweb浮點型字段"
+msgstr "Qweb浮點型欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_html
 msgid "Qweb Field HTML"
-msgstr "QwebHTML字段"
+msgstr "QwebHTML欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_image
 msgid "Qweb Field Image"
-msgstr "Qweb圖像字段"
+msgstr "Qweb圖像欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_integer
 msgid "Qweb Field Integer"
-msgstr "Qweb整數字段"
+msgstr "Qweb整數欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_many2one
 msgid "Qweb Field Many to One"
-msgstr "Qweb多對一字段"
+msgstr "Qweb多對一欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_monetary
@@ -1660,22 +1755,22 @@ msgstr "Qweb 欄位貨幣"
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_relative
 msgid "Qweb Field Relative"
-msgstr "Qweb相關字段"
+msgstr "Qweb關聯欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_selection
 msgid "Qweb Field Selection"
-msgstr "Qweb選擇字段"
+msgstr "Qweb選擇欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_text
 msgid "Qweb Field Text"
-msgstr "Qweb文本字段"
+msgstr "Qweb文本欄位"
 
 #. module: web_editor
 #: model:ir.model,name:web_editor.model_ir_qweb_field_qweb
 msgid "Qweb Field qweb"
-msgstr "Qweb字段"
+msgstr "Qweb欄位"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.colorpicker
@@ -1687,7 +1782,14 @@ msgstr "放射性"
 #: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #, python-format
 msgid "Readonly field"
-msgstr "只讀字段"
+msgstr "唯讀欄位"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/image_link_tools.xml:0
+#, python-format
+msgid "Redirect the user elsewhere when he clicks on the media."
+msgstr "用戶點按媒體時，重新導向至其他地方。"
 
 #. module: web_editor
 #. openerp-web
@@ -1907,7 +2009,7 @@ msgstr "儲存"
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
 #, python-format
 msgid "Save and Install"
-msgstr "保存並安裝"
+msgstr "儲存並安裝"
 
 #. module: web_editor
 #. openerp-web
@@ -1920,7 +2022,7 @@ msgstr "儲存並重新載入"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippets
 msgid "Save record"
-msgstr "保存記錄"
+msgstr "儲存記錄"
 
 #. module: web_editor
 #. openerp-web
@@ -2001,7 +2103,7 @@ msgstr "在頁面上選擇一個區塊來設置樣式。"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Sepia"
-msgstr ""
+msgstr "泛黃"
 
 #. module: web_editor
 #. openerp-web
@@ -2102,6 +2204,7 @@ msgstr "小"
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "Solid"
@@ -2189,6 +2292,14 @@ msgid "The URL seems valid."
 msgstr "URL 似乎有效。"
 
 #. module: web_editor
+#: code:addons/web_editor/controllers/main.py:0
+#, python-format
+msgid ""
+"The document was already saved from someone with a different history for "
+"model %r, field %r with id %r."
+msgstr "文件已由其他有不同歷史記錄的人儲存。歷史記錄相異項目：模型 %r、欄位 %r 連識別碼 %r。"
+
+#. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
@@ -2215,6 +2326,16 @@ msgstr "提供的網址無效"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/xml/editor.xml:0
+#, python-format
+msgid ""
+"The version from the database will be used.\n"
+"                    If you need to keep your changes, copy the content below and edit the new document."
+msgstr ""
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/snippets.xml:0
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #, python-format
 msgid "Theme"
@@ -2226,6 +2347,13 @@ msgstr "佈景主題"
 #, python-format
 msgid "Theme colors"
 msgstr "主題顏色"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/editor.xml:0
+#, python-format
+msgid "There is a conflict between your version and the one in the database."
+msgstr "你的版本與資料庫中的版本存有衝突。"
 
 #. module: web_editor
 #. openerp-web
@@ -2246,7 +2374,7 @@ msgstr "此區塊已過時"
 #: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #, python-format
 msgid "This document is not saved!"
-msgstr "本文件沒有被保存！"
+msgstr "本文件沒有被儲存！"
 
 #. module: web_editor
 #. openerp-web
@@ -2283,7 +2411,7 @@ msgstr "不支援裁剪這種類型的圖片。<br/>如果您想裁剪它，請�
 #: code:addons/web_editor/static/src/xml/snippets.xml:0
 #, python-format
 msgid "Title"
-msgstr "稱謂"
+msgstr "標題"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -2297,7 +2425,7 @@ msgstr "標題標籤"
 msgid ""
 "To apply this change, we need to save all your previous modifications and "
 "reload the page."
-msgstr "要應用此更改，我們需要保存您之前的所有修改並重新加載頁面。"
+msgstr "要應用此更改，我們需要儲存您之前的所有修改並重新加載頁面。"
 
 #. module: web_editor
 #. openerp-web
@@ -2315,7 +2443,7 @@ msgstr "要進行更改，請刪除此區塊並使用新版本。"
 msgid ""
 "To save a snippet, we need to save all your previous modifications and "
 "reload the page."
-msgstr "要保存代碼段，我們需要保存您之前的所有修改並重新加載頁面。"
+msgstr "要儲存代碼段，我們需要儲存您之前的所有修改並重新加載頁面。"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -2356,6 +2484,13 @@ msgstr "切換斜體"
 #, python-format
 msgid "Toggle ordered list"
 msgstr "切換列表"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/editor.xml:0
+#, python-format
+msgid "Toggle strikethrough"
+msgstr "刪除線"
 
 #. module: web_editor
 #. openerp-web
@@ -2419,17 +2554,17 @@ msgstr "透明顏色"
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "Try searching with other keywords."
+msgstr "請嘗試使用其他關鍵字搜尋。"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #: model_terms:ir.ui.view,arch_db:web_editor.colorpicker
 #, python-format
 msgid "Type"
 msgstr "類型"
-
-#. module: web_editor
-#. openerp-web
-#: code:addons/web_editor/static/lib/odoo-editor/src/OdooEditor.js:0
-#, python-format
-msgid "Type \"/\" for commands"
-msgstr ""
 
 #. module: web_editor
 #. openerp-web
@@ -2480,11 +2615,12 @@ msgstr "不支援上傳圖片的格式。試試：%s"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Valencia"
-msgstr ""
+msgstr "華倫西亞"
 
 #. module: web_editor
 #. openerp-web
 #: code:addons/web_editor/static/src/js/editor/snippets.editor.js:0
+#: code:addons/web_editor/static/src/js/wysiwyg/wysiwyg.js:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "Video"
@@ -2533,7 +2669,16 @@ msgstr "Vimeo"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "Walden"
-msgstr ""
+msgstr "Walden"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/editor.xml:0
+#, python-format
+msgid ""
+"Warning: after closing this dialog, the version you were working on will be "
+"discarded and will never be available anymore."
+msgstr "警告：關閉此對話框後，你正在編輯的版本將會丟棄，永遠無法再用。"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
@@ -2604,7 +2749,7 @@ msgstr "您可以使用螢幕左上角的按鈕上傳圖像。"
 #: code:addons/web_editor/controllers/main.py:0
 #, python-format
 msgid "You need to specify either data or url to create an attachment."
-msgstr "您需要指定資料或 URL 以創建附件。"
+msgstr "您需要指定資料或 URL 以建立附件。"
 
 #. module: web_editor
 #. openerp-web
@@ -2644,7 +2789,14 @@ msgstr "縮小"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "add"
-msgstr "添加"
+msgstr "相加"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "all"
+msgstr "所有"
 
 #. module: web_editor
 #. openerp-web
@@ -2665,6 +2817,13 @@ msgstr "變暗"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "database"
+msgstr "資料庫"
+
+#. module: web_editor
+#. openerp-web
 #: code:addons/web_editor/static/src/xml/editor.xml:0
 #, python-format
 msgid "default"
@@ -2674,6 +2833,27 @@ msgstr "預設"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "exclusion"
 msgstr "排除"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "fill"
+msgstr "fill"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "fill,rounded-circle"
+msgstr "fill,rounded-circle"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "flat"
+msgstr "平坦"
 
 #. module: web_editor
 #. openerp-web
@@ -2690,14 +2870,42 @@ msgid "https://www.odoo.com/mydocument"
 msgstr "https://www.odoo.com/mydocument"
 
 #. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "lg"
+msgstr "lg"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "lighten"
-msgstr ""
+msgstr "變亮"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "media-library"
+msgstr "media-library"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "multiply"
-msgstr ""
+msgstr "相乘"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "outline"
+msgstr "outline"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "outline,rounded-circle"
+msgstr "outline,rounded-circle"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
@@ -2712,9 +2920,23 @@ msgid "px"
 msgstr "px"
 
 #. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "rounded-circle"
+msgstr "rounded-circle"
+
+#. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_image_optimization_widgets
 msgid "screen"
-msgstr ""
+msgstr "螢幕"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
+#, python-format
+msgid "sm"
+msgstr "sm"
 
 #. module: web_editor
 #. openerp-web
@@ -2722,6 +2944,13 @@ msgstr ""
 #, python-format
 msgid "videos"
 msgstr "影片"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/image_link_tools.xml:0
+#, python-format
+msgid "www.example.com"
+msgstr "www.example.com"
 
 #. module: web_editor
 #. openerp-web
@@ -2740,7 +2969,7 @@ msgstr "⌙ 邊框..."
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "⌙ Color filter"
-msgstr "⌙ 彩色濾鏡..."
+msgstr "⌙ 色彩濾鏡"
 
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options
@@ -2784,6 +3013,7 @@ msgstr "⌙ 主色調"
 
 #. module: web_editor
 #. openerp-web
+#: code:addons/web_editor/static/src/xml/image_link_tools.xml:0
 #: code:addons/web_editor/static/src/xml/wysiwyg.xml:0
 #, python-format
 msgid "⌙ Open in new window"
@@ -2792,7 +3022,7 @@ msgstr "⌙ 在新頁面中打開"
 #. module: web_editor
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "⌙ Position"
-msgstr ""
+msgstr "⌙ Position"
 
 #. module: web_editor
 #. openerp-web
@@ -2827,3 +3057,10 @@ msgstr "⌙ 文字顏色"
 #: model_terms:ir.ui.view,arch_db:web_editor.snippet_options_background_options
 msgid "⌙ Width"
 msgstr "⌙ 寬度"
+
+#. module: web_editor
+#. openerp-web
+#: code:addons/web_editor/static/src/xml/image_link_tools.xml:0
+#, python-format
+msgid "⌙ Your URL"
+msgstr ""

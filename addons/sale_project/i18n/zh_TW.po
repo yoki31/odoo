@@ -4,15 +4,16 @@
 # 
 # Translators:
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Tony Ng, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 10:54+0000\n"
+"POT-Creation-Date: 2024-08-14 15:43+0000\n"
 "PO-Revision-Date: 2021-09-14 12:26+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Tony Ng, 2023\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -56,7 +57,7 @@ msgstr "有待開立應收憑單之SO"
 msgid ""
 "Invoice as soon as this service is sold, and create a task in an existing "
 "project to track the time spent."
-msgstr "此服務售出後立即開立應收憑單，並在現有專案中創建任務以追蹤花費的時間。"
+msgstr "此服務售出後立即開立應收憑單，並在現有專案中建立任務以追蹤花費的時間。"
 
 #. module: sale_project
 #: code:addons/sale_project/models/product.py:0
@@ -65,7 +66,7 @@ msgid ""
 "Invoice ordered quantities as soon as this service is sold, and create a "
 "project for the order with a task for each sales order line to track the "
 "time spent."
-msgstr "在此服務售出後立即為訂購數量開立應收憑單，並為訂單創建一個專案，並為每個銷售訂單明細創建一個任務以追蹤所花費的時間。"
+msgstr "在此服務售出後立即為訂購數量開立應收憑單，並為訂單建立一個專案，並為每個銷售訂單明細建立一個任務以追蹤所花費的時間。"
 
 #. module: sale_project
 #: code:addons/sale_project/models/product.py:0
@@ -73,7 +74,7 @@ msgstr "在此服務售出後立即為訂購數量開立應收憑單，並為訂
 msgid ""
 "Invoice ordered quantities as soon as this service is sold, and create an "
 "empty project for the order to track the time spent."
-msgstr "在此服務售出後立即為訂購數量開立應收憑單，並為訂單創建一個新專案以追蹤花費的時間。"
+msgstr "在此服務售出後立即為訂購數量開立應收憑單，並為訂單建立一個新專案以追蹤花費的時間。"
 
 #. module: sale_project
 #: code:addons/sale_project/models/product.py:0
@@ -90,7 +91,7 @@ msgstr "是服務"
 #: code:addons/sale_project/models/sale_order.py:0
 #, python-format
 msgid "New"
-msgstr "新的"
+msgstr "新增"
 
 #. module: sale_project
 #: model_terms:ir.ui.view,arch_db:sale_project.portal_tasks_list_inherit
@@ -120,7 +121,7 @@ msgid ""
 "         'In sale order's project': Will use the sale order's configured project if defined or fallback to         creating a new project based on the selected template."
 msgstr ""
 "在銷售訂單確認時，此產品可以生成專案和/或任務。        從中，您可以跟蹤您正在銷售的服務。\n"
-"         \"銷售訂單專案\"：如果定義或回退，將使用銷售訂單的設定項目基於所選範本創建新專案。"
+"         \"銷售訂單專案\"：如果定義或回退，將使用銷售訂單的設定項目基於所選範本建立新專案。"
 
 #. module: sale_project
 #: model:ir.model,name:sale_project.model_product_product
@@ -189,6 +190,7 @@ msgstr "銷售訂單"
 #: model:ir.model.fields,field_description:sale_project.field_project_task__sale_order_id
 #: model:ir.model.fields,field_description:sale_project.field_report_project_task_user__sale_order_id
 #: model_terms:ir.ui.view,arch_db:sale_project.project_sharing_inherit_project_task_view_form
+#: model_terms:ir.ui.view,arch_db:sale_project.project_task_view_search
 #: model_terms:ir.ui.view,arch_db:sale_project.view_edit_project_inherit_form
 #: model_terms:ir.ui.view,arch_db:sale_project.view_sale_project_inherit_form
 #, python-format
@@ -256,19 +258,19 @@ msgstr "任務連結到的銷售訂單。"
 #: code:addons/sale_project/controllers/portal.py:0
 #, python-format
 msgid "Search in Invoice"
-msgstr "於應收憑單中搜尋"
+msgstr "搜尋發票"
 
 #. module: sale_project
 #: code:addons/sale_project/controllers/portal.py:0
 #, python-format
 msgid "Search in Sales Order"
-msgstr "於銷售訂單中搜尋"
+msgstr "搜尋銷售訂單"
 
 #. module: sale_project
 #: code:addons/sale_project/controllers/portal.py:0
 #, python-format
 msgid "Search in Sales Order Item"
-msgstr "於銷售訂單明細中搜尋"
+msgstr "搜尋銷售訂單項目"
 
 #. module: sale_project
 #: model:ir.model.fields,help:sale_project.field_product_product__project_id
@@ -284,7 +286,7 @@ msgstr "選擇可以在其上建立任務的可計費專案。 必須為每個�
 msgid ""
 "Select a billable project to be the skeleton of the new created project when"
 " selling the current product. Its stages and tasks will be duplicated."
-msgstr "在銷售當前產品時，選擇一個可計費專案作為新建立專案的框架。 它的階段和任務將重複。"
+msgstr "在銷售當前產品時，選擇一個可計費專案作為新增專案的框架。 它的階段和任務將重複。"
 
 #. module: sale_project
 #: model:ir.model.fields,help:sale_project.field_sale_order__project_id

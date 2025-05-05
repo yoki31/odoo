@@ -98,6 +98,8 @@ function factory(dependencies) {
                             return this._handleNotificationPartnerTransientMessage(message.payload);
                         case 'mail.channel/leave':
                             return this._handleNotificationChannelLeave(message.payload);
+                        case 'mail.channel/delete':
+                            return this._handleNotificationChannelDelete(message.payload);
                         case 'res.users/connection':
                             return this._handleNotificationPartnerUserConnection(message.payload);
                         case 'mail.activity/updated':
@@ -157,6 +159,22 @@ function factory(dependencies) {
 
         /**
          * @private
+         * @param {Object} payload
+         * @param {integer} payload.id
+         */
+        async _handleNotificationChannelDelete({ id: channelId }) {
+            const channel = this.messaging.models['mail.thread'].findFromIdentifyingData({
+                id: channelId,
+                model: 'mail.channel',
+            });
+            if (!channel) {
+                return;
+            }
+            channel.delete();
+        }
+
+        /**
+         * @private
          * @param {Object} param1
          * @param {integer} param1.channel_id
          * @param {integer} param1.last_message_id
@@ -197,11 +215,11 @@ function factory(dependencies) {
          * @private
          * @param {Object} payload
          * @param {mail.thread} payload.channel
-         * @param {integer} payload.invited_by_user_id
+         * @param {integer} [payload.invited_by_user_id]
          */
         _handleNotificationChannelJoined({ channel: channelData, invited_by_user_id: invitedByUserId }) {
             const channel = this.messaging.models['mail.thread'].insert(this.messaging.models['mail.thread'].convertData(channelData));
-            if (invitedByUserId !== this.messaging.currentUser.id) {
+            if (this.messaging.currentUser && invitedByUserId !== this.messaging.currentUser.id) {
                 // Current user was invited by someone else.
                 this.env.services['notification'].notify({
                     message: _.str.sprintf(

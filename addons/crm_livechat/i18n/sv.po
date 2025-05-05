@@ -3,18 +3,17 @@
 # 	* crm_livechat
 # 
 # Translators:
-# Chrille Hedberg <hedberg.chrille@gmail.com>, 2021
-# Jakob Krabbe <jakob.krabbe@vertel.se>, 2021
 # Kim Asplund <kim.asplund@gmail.com>, 2021
+# Chrille Hedberg <hedberg.chrille@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.4\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-12 07:50+0000\n"
+"POT-Creation-Date: 2024-08-14 15:43+0000\n"
 "PO-Revision-Date: 2021-09-14 12:21+0000\n"
-"Last-Translator: Kim Asplund <kim.asplund@gmail.com>, 2021\n"
-"Language-Team: Swedish (https://www.transifex.com/odoo/teams/41243/sv/)\n"
+"Last-Translator: Chrille Hedberg <hedberg.chrille@gmail.com>, 2021\n"
+"Language-Team: Swedish (https://app.transifex.com/odoo/teams/41243/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,10 +21,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: crm_livechat
+#. openerp-web
 #: code:addons/crm_livechat/models/mail_channel.py:0
+#: code:addons/crm_livechat/static/src/models/messaging_initializer/messaging_initializer.js:0
 #, python-format
 msgid "Create a new lead (/lead lead title)"
-msgstr "Skapa ny affärsmöjlighet (/lead lead titel)"
+msgstr "Skapa ny lead"
 
 #. module: crm_livechat
 #: code:addons/crm_livechat/models/mail_channel.py:0
@@ -34,13 +35,13 @@ msgid ""
 "Created a new lead: <a href=\"#\" data-oe-id=\"%s\" data-oe-"
 "model=\"crm.lead\">%s</a>"
 msgstr ""
-"Skapa ny affärsmöjlighet: <a href=\"#\" data-oe-id=\"%s\" data-oe-"
+"Skapa ny möjlighet: <a href=\"#\" data-oe-id=\"%s\" data-oe-"
 "model=\"crm.lead\">%s</a>"
 
 #. module: crm_livechat
 #: model:ir.model,name:crm_livechat.model_mail_channel
 msgid "Discussion Channel"
-msgstr "Diskussionskanal"
+msgstr "Kanal"
 
 #. module: crm_livechat
 #: model:utm.source,name:crm_livechat.utm_source_livechat

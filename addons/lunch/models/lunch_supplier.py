@@ -6,7 +6,8 @@ import pytz
 from datetime import datetime, time, timedelta
 from textwrap import dedent
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo.tools import float_round
 
@@ -168,6 +169,14 @@ class LunchSupplier(models.Model):
             }
             for _ in range(len(vals_list))
         ])
+        self.env['ir.model.data'].sudo().create([{
+            'name': f'lunch_supplier_cron_sa_{cron.ir_actions_server_id.id}',
+            'module': 'lunch',
+            'res_id': cron.ir_actions_server_id.id,
+            'model': 'ir.actions.server',
+            # noupdate is set to true to avoid to delete record at module update
+            'noupdate': True,
+        } for cron in crons])
         for vals, cron in zip(vals_list, crons):
             vals['cron_id'] = cron.id
 
@@ -188,12 +197,16 @@ class LunchSupplier(models.Model):
             self.env['lunch.order'].search([('supplier_id', 'in', self.ids)]).write({'company_id': values['company_id']})
         super().write(values)
         if not CRON_DEPENDS.isdisjoint(values):
+            # flush automatic_email_time field to call _sql_constraints
+            self.flush(['automatic_email_time'])
             self._sync_cron()
 
     def unlink(self):
         crons = self.cron_id.sudo()
+        server_actions = crons.ir_actions_server_id
         super().unlink()
         crons.unlink()
+        server_actions.unlink()
 
     def toggle_active(self):
         """ Archiving related lunch product """
@@ -214,7 +227,7 @@ class LunchSupplier(models.Model):
             return
 
         if self.send_by != 'mail':
-            raise ValueError("Cannot send an email to this supplier")
+            raise UserError(_("Cannot send an email to this supplier!"))
 
         orders = self.env['lunch.order'].search([
             ('supplier_id', '=', self.id),

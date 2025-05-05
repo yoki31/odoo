@@ -2,9 +2,11 @@
 from __future__ import print_function
 from textwrap import dedent
 import copy
+import io
 import logging
 import re
 import markupsafe
+import tokenize
 from lxml import html, etree
 
 from odoo import api, models, tools
@@ -26,13 +28,30 @@ _SAFE_QWEB_OPCODES = _EXPR_OPCODES.union(to_opcodes([
     'CALL_METHOD', 'LOAD_METHOD',
 
     'GET_ITER', 'FOR_ITER', 'YIELD_VALUE',
-    'JUMP_FORWARD', 'JUMP_ABSOLUTE',
+    'JUMP_FORWARD', 'JUMP_ABSOLUTE', 'JUMP_BACKWARD',
     'JUMP_IF_FALSE_OR_POP', 'JUMP_IF_TRUE_OR_POP', 'POP_JUMP_IF_FALSE', 'POP_JUMP_IF_TRUE',
 
     'LOAD_NAME', 'LOAD_ATTR',
     'LOAD_FAST', 'STORE_FAST', 'UNPACK_SEQUENCE',
     'STORE_SUBSCR',
     'LOAD_GLOBAL',
+    # Following opcodes were added in 3.11 https://docs.python.org/3/whatsnew/3.11.html#new-opcodes
+    'RESUME',
+    'CALL',
+    'PRECALL',
+    'POP_JUMP_FORWARD_IF_FALSE',
+    'PUSH_NULL',
+    'POP_JUMP_FORWARD_IF_TRUE', 'KW_NAMES',
+    'FORMAT_VALUE', 'BUILD_STRING',
+    'RETURN_GENERATOR',
+    'POP_JUMP_BACKWARD_IF_FALSE',
+    'SWAP',
+    # 3.12 https://docs.python.org/3/whatsnew/3.12.html#new-opcodes
+    'END_FOR',
+    'LOAD_FAST_AND_CLEAR',
+    'POP_JUMP_IF_NOT_NONE', 'POP_JUMP_IF_NONE',
+    'RERAISE',
+    'CALL_INTRINSIC_1',
 ])) - _BLACKLIST
 
 
@@ -376,6 +395,55 @@ class IrQWeb(models.AbstractModel, QWeb):
 
         :param expr: string
         """
-        namespace_expr = super()._compile_expr(expr, raise_on_missing=raise_on_missing)
+        readable = io.BytesIO(expr.strip().encode('utf-8'))
+        try:
+            tokens = list(tokenize.tokenize(readable.readline))
+        except tokenize.TokenError:
+            raise ValueError(f"Cannot compile expression: {expr}")
+
+        namespace_expr = self._compile_expr_tokens(tokens, self._allowed_keyword + list(self._available_objects.keys()), raise_on_missing=raise_on_missing)
+
         assert_valid_codeobj(_SAFE_QWEB_OPCODES, compile(namespace_expr, '<>', 'eval'), expr)
         return namespace_expr
+
+
+def render(template_name, values, load, **options):
+    """ Rendering of a qweb template without database and outside the registry.
+    (Widget, field, or asset rendering is not implemented.)
+    :param (string|int) template_name: template identifier
+    :param dict values: template values to be used for rendering
+    :param def load: function like `load(template_name, options)` which
+        returns an etree from the given template name (from initial rendering
+        or template `t-call`).
+    :param options: used to compile the template (the dict available for the
+        rendering is frozen)
+    :returns: bytes marked as markup-safe (decode to :class:`markupsafe.Markup`
+                instead of `str`)
+    :rtype: MarkupSafe
+    """
+    class MockPool:
+        db_name = None
+        _Registry__cache = {}
+
+    class MockIrQWeb(IrQWeb):
+        _register = False               # not visible in real registry
+
+        pool = MockPool()
+
+        def _get_field(self, *args):
+            raise NotImplementedError("Fields are not allowed in this rendering mode. Please use \"env['ir.qweb']._render\" method")
+
+        def _get_widget(self, *args):
+            raise NotImplementedError("Widgets are not allowed in this rendering mode. Please use \"env['ir.qweb']._render\" method")
+
+        def _get_asset_nodes(self, *args):
+            raise NotImplementedError("Assets are not allowed in this rendering mode. Please use \"env['ir.qweb']._render\" method")
+
+    class MockEnv(dict):
+        def __init__(self):
+            super().__init__()
+            self.context = {}
+
+    renderer = object.__new__(MockIrQWeb)
+    renderer.env = MockEnv()
+    return renderer._render(template_name, values, load=load, **options)

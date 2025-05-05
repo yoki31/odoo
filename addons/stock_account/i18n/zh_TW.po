@@ -4,15 +4,17 @@
 # 
 # Translators:
 # 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Tony Ng, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2024-08-14 15:42+0000\n"
 "PO-Revision-Date: 2021-09-14 12:26+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -68,12 +70,12 @@ msgstr "<span>數量</span>"
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>SN/LN</span>"
-msgstr "<span>SN/LN</span>"
+msgstr "<span>序號/批次</span>"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_chart_template
 msgid "Account Chart Template"
-msgstr "項目表模版"
+msgstr "賬目總表範本"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_move__account_move_ids
@@ -268,7 +270,7 @@ msgstr "日期"
 msgid ""
 "Date at which the accounting entries will be created in case of automated "
 "inventory valuation. If empty, the inventory date will be used."
-msgstr "在自動清點估價的情況下創建會計分錄的日期。如果為空，將使用庫存日期。"
+msgstr "在自動清點估價的情況下建立會計分錄的日期。如果為空，將使用庫存日期。"
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_stock_valuation_layer__uom_id
@@ -332,7 +334,6 @@ msgid "Inventory Locations"
 msgstr "盤點位置"
 
 #. module: stock_account
-#: code:addons/stock_account/__init__.py:0
 #: code:addons/stock_account/__init__.py:0
 #: code:addons/stock_account/models/account_chart_template.py:0
 #: model:ir.model.fields,field_description:stock_account.field_product_category__property_valuation
@@ -428,7 +429,7 @@ msgid ""
 "        "
 msgstr ""
 "手動：盤點存貨的會計傳票不會自動過帳。\n"
-"自動：當產品進入或離開公司時，自動創建一個會計傳票來評估庫存。"
+"自動：當產品進入或離開公司時，自動建立一個會計傳票來評估庫存。"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer_revaluation__new_value
@@ -610,7 +611,7 @@ msgstr "庫存補貨報告"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_request_count
 msgid "Stock Request an Inventory Count"
-msgstr ""
+msgstr "庫存請求進行盤點"
 
 #. module: stock_account
 #: model:ir.actions.act_window,name:stock_account.stock_valuation_layer_action
@@ -672,7 +673,7 @@ msgstr "庫存輸入和/或輸出科目不能與庫存估價科目相同。"
 msgid ""
 "The action leads to the creation of a journal entry, for which you don't "
 "have the access rights."
-msgstr "該操作會導致創建您沒有訪問權限的日記帳分錄。"
+msgstr "該操作會導致建立您沒有存取權限的日記帳分錄。"
 
 #. module: stock_account
 #: code:addons/stock_account/wizard/stock_valuation_layer_revaluation.py:0
@@ -706,11 +707,19 @@ msgid ""
 msgstr "移動名細處於不一致的狀態:它們不屬於同一個來源或目的地之公司。"
 
 #. module: stock_account
+#: code:addons/stock_account/wizard/stock_valuation_layer_revaluation.py:0
+#, python-format
+msgid ""
+"The value of a stock valuation layer cannot be negative. Landed cost could "
+"be use to correct a specific transfer."
+msgstr "庫存估值層的值不可以是負數。到岸成本可用於糾正特定的轉移。"
+
+#. module: stock_account
 #: model_terms:ir.actions.act_window,help:stock_account.stock_valuation_layer_action
 msgid ""
 "There is no valuation layers. Valuation layers are created when some product"
 " moves should impact the valuation of the stock."
-msgstr "沒有估價層。當某些產品移動會影響庫存的估值時，將創建估價層。"
+msgstr "沒有估價層。當某些產品移動會影響庫存的估值時，將建立估價層。"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__value
@@ -848,7 +857,7 @@ msgid ""
 "You cannot update the cost of a product in automated valuation as it leads "
 "to the creation of a journal entry, for which you don't have the access "
 "rights."
-msgstr "您無法在自動評價中更新產品成本，因為這會導致創建您沒有訪問權限的日記帳分錄。"
+msgstr "您無法在自動評價中更新產品成本，因為這會導致建立您沒有存取權限的日記帳分錄。"
 
 #. module: stock_account
 #: code:addons/stock_account/models/product.py:0
@@ -856,7 +865,15 @@ msgstr "您無法在自動評價中更新產品成本，因為這會導致創建
 msgid ""
 "You don't have any input valuation account defined on your product category."
 " You must define one before processing this operation."
-msgstr "您沒有在產品類別上定義任何輸入估價項目。在處理此操作之前，必須定義一個。"
+msgstr "你的產品類別未設定任何輸入估值賬戶。處理此操作前，必須先定義相關賬戶。"
+
+#. module: stock_account
+#: code:addons/stock_account/models/product.py:0
+#, python-format
+msgid ""
+"You don't have any output valuation account defined on your product "
+"category. You must define one before processing this operation."
+msgstr "你的產品類別未設定任何輸出估值賬戶。處理此操作前，必須先定義相關賬戶。"
 
 #. module: stock_account
 #: code:addons/stock_account/models/product.py:0
@@ -883,7 +900,7 @@ msgstr "您沒有在產品類別上定義的任何庫存日記帳, 請檢查是�
 msgid ""
 "You don't have any stock valuation account defined on your product category."
 " You must define one before processing this operation."
-msgstr "您沒有在您的產品類別中定義任何庫存評估帳戶。 處理此操作之前，您必須定義一個。"
+msgstr "你的產品類別未設定任何庫存估值賬戶。處理此操作前，必須先定義相關賬戶。"
 
 #. module: stock_account
 #: code:addons/stock_account/models/product.py:0

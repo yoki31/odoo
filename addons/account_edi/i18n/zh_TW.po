@@ -3,16 +3,20 @@
 # 	* account_edi
 # 
 # Translators:
-# 敬雲 林 <chingyun@yuanchih-consult.com>, 2021
+# Benson <Benson.Dr@Gmail.com>, 2022
+# 敬雲 林 <chingyun@yuanchih-consult.com>, 2022
+# Tony Ng, 2023
+# Pak Wai Ho, 2024
+# Wil Odoo, 2024
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~14.5\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 10:28+0000\n"
+"POT-Creation-Date: 2024-08-14 15:43+0000\n"
 "PO-Revision-Date: 2021-09-14 12:19+0000\n"
-"Last-Translator: 敬雲 林 <chingyun@yuanchih-consult.com>, 2021\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/odoo/teams/41243/zh_TW/)\n"
+"Last-Translator: Wil Odoo, 2024\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/odoo/teams/41243/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,31 +27,33 @@ msgstr ""
 #: code:addons/account_edi/models/account_move.py:0
 #, python-format
 msgid " Electronic invoicing error(s)"
-msgstr ""
+msgstr " 電子應收憑單(發票)錯誤"
 
 #. module: account_edi
 #: code:addons/account_edi/models/account_move.py:0
 #, python-format
 msgid " Electronic invoicing info(s)"
-msgstr ""
+msgstr " 電子應收憑單(發票)訊息"
 
 #. module: account_edi
 #: code:addons/account_edi/models/account_move.py:0
 #, python-format
 msgid " Electronic invoicing warning(s)"
-msgstr ""
+msgstr " 電子應收憑單(發票)警示"
 
 #. module: account_edi
 #: code:addons/account_edi/models/account_move.py:0
+#: code:addons/account_edi/models/account_payment.py:0
 #, python-format
 msgid "A cancellation of the EDI has been requested."
 msgstr "已請求取消 EDI."
 
 #. module: account_edi
 #: code:addons/account_edi/models/account_move.py:0
+#: code:addons/account_edi/models/account_payment.py:0
 #, python-format
 msgid "A request for cancellation of the EDI has been called off."
-msgstr ""
+msgstr "取消 EDI 的請求已被取消."
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_ir_attachment
@@ -58,21 +64,26 @@ msgstr "附件"
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__blocking_level
 msgid "Blocking Level"
-msgstr ""
+msgstr "禁用等級"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_edi_document__blocking_level
 msgid ""
-"Blocks the document current operation depending on the error severity :\n"
+"Blocks the current operation of the document depending on the error severity:\n"
 "  * Info: the document is not blocked and everything is working as it should.\n"
-"  * Warning : there is an error that doesn't prevent the current Electronic Invoicing operation to succeed.\n"
-"  * Error : there is an error that blocks the current Electronic Invoicing operation."
+"  * Warning: there is an error that doesn't prevent the current Electronic Invoicing operation to succeed.\n"
+"  * Error: there is an error that blocks the current Electronic Invoicing operation."
 msgstr ""
+"根據錯誤嚴重性阻止文件當前操作:\n"
+"  * 訊息：文件沒有被阻止，一切正常。\n"
+"  * 警告：存在不會阻止當前電子應收憑單(發票)操作成功的錯誤。\n"
+"  * 錯誤：有一個錯誤阻止了當前的電子發票操作."
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
+#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Call off EDI Cancellation"
-msgstr ""
+msgstr "取消 EDI 取消動作"
 
 #. module: account_edi
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__state__cancelled
@@ -102,7 +113,7 @@ msgstr "相容的 EDI"
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__create_uid
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_format__create_uid
 msgid "Created by"
-msgstr "創立者"
+msgstr "建立者"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__create_date
@@ -117,6 +128,12 @@ msgid "Display Name"
 msgstr "顯示名稱"
 
 #. module: account_edi
+#: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
+#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
+msgid "Download"
+msgstr "下載"
+
+#. module: account_edi
 #: model:ir.actions.server,name:account_edi.ir_cron_edi_network_ir_actions_server
 #: model:ir.cron,cron_name:account_edi.ir_cron_edi_network
 #: model:ir.cron,name:account_edi.ir_cron_edi_network
@@ -127,7 +144,7 @@ msgstr "EDI : 執行 Web 服務操作"
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
 #: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "EDI Documents"
-msgstr ""
+msgstr "EDI 文件"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_edi_format
@@ -144,7 +161,12 @@ msgstr "支援此日記帳分錄的 EDI 格式"
 #: model:ir.model.fields,field_description:account_edi.field_account_move__edi_blocking_level
 #: model:ir.model.fields,field_description:account_edi.field_account_payment__edi_blocking_level
 msgid "Edi Blocking Level"
-msgstr ""
+msgstr "Edi 禁用等級"
+
+#. module: account_edi
+#: model:ir.model.fields,field_description:account_edi.field_account_edi_document__edi_content
+msgid "Edi Content"
+msgstr "EDI 內容"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_document_ids
@@ -165,7 +187,7 @@ msgstr "EDI 錯誤計數"
 #: model:ir.model.fields,field_description:account_edi.field_account_move__edi_error_message
 #: model:ir.model.fields,field_description:account_edi.field_account_payment__edi_error_message
 msgid "Edi Error Message"
-msgstr ""
+msgstr "Edi 錯誤訊息"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__edi_format_id
@@ -177,7 +199,7 @@ msgstr "EDI 格式"
 #: model:ir.model.fields,field_description:account_edi.field_account_move__edi_show_abandon_cancel_button
 #: model:ir.model.fields,field_description:account_edi.field_account_payment__edi_show_abandon_cancel_button
 msgid "Edi Show Abandon Cancel Button"
-msgstr ""
+msgstr "Edi 顯示放棄取消按鈕"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_show_cancel_button
@@ -196,7 +218,7 @@ msgstr "要處理的 EDI Web 服務"
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_account_journal_form_inherited
 msgid "Electronic Data Interchange"
-msgstr "電子數據交換"
+msgstr "電子資料交換"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_edi_document
@@ -216,12 +238,12 @@ msgstr "EDI憑單"
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_account_invoice_filter
 msgid "Electronic invoicing state"
-msgstr ""
+msgstr "電子應收憑單(發票)狀態"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_mail_template
 msgid "Email Templates"
-msgstr "電子信件模板"
+msgstr "電子郵件模板"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__error
@@ -240,7 +262,7 @@ msgstr "格式名稱"
 #: model:ir.model.fields,help:account_edi.field_account_move__edi_error_count
 #: model:ir.model.fields,help:account_edi.field_account_payment__edi_error_count
 msgid "How many EDIs are in error for this move ?"
-msgstr ""
+msgstr "此憑證有多少 EDI 出錯?"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__id
@@ -262,6 +284,9 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"無效應收付(發票)設定:\n"
+"\n"
+"%s"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_journal
@@ -310,7 +335,7 @@ msgstr "名稱"
 #. module: account_edi
 #: model:ir.model.constraint,message:account_edi.constraint_account_edi_document_unique_edi_document_by_move_by_format
 msgid "Only one edi document by move by format"
-msgstr ""
+msgstr "按格式過帳只能有一個 edi 文件"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_payment
@@ -321,7 +346,17 @@ msgstr "付款"
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
 #: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Process now"
-msgstr ""
+msgstr "立刻執行"
+
+#. module: account_edi
+#: model:ir.model,name:account_edi.model_uom_uom
+msgid "Product Unit of Measure"
+msgstr "產品測量單位"
+
+#. module: account_edi
+#: model:ir.model,name:account_edi.model_account_resequence_wizard
+msgid "Remake the sequence of Journal Entries."
+msgstr "重新建立日記帳分錄的序列."
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_ir_actions_report
@@ -330,6 +365,7 @@ msgstr "報告動作"
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
+#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Request EDI Cancellation"
 msgstr "請求取消EDI"
 
@@ -342,7 +378,7 @@ msgstr "重試"
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_journal__edi_format_ids
 msgid "Send XML/EDI invoices"
-msgstr "發送 XML/EDI 憑單"
+msgstr "發送 XML/EDI 憑單(發票)"
 
 #. module: account_edi
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__state__sent
@@ -353,7 +389,7 @@ msgstr "已發送"
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__state
 msgid "State"
-msgstr "縣市"
+msgstr "狀態"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_bank_statement_line__edi_web_services_to_process
@@ -361,47 +397,60 @@ msgstr "縣市"
 #: model:ir.model.fields,help:account_edi.field_account_payment__edi_web_services_to_process
 msgid ""
 "Technical field to display the documents that will be processed by the CRON"
-msgstr ""
+msgstr "顯示將由 CRON 處理文件的技術欄位"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_bank_statement_line__edi_state
 #: model:ir.model.fields,help:account_edi.field_account_move__edi_state
 #: model:ir.model.fields,help:account_edi.field_account_payment__edi_state
 msgid "The aggregated state of all the EDIs with web-service of this move"
-msgstr ""
+msgstr "此過帳憑證的所有 EDI 的聚合狀態"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_edi_document__attachment_id
 msgid ""
 "The file generated by edi_format_id when the invoice is posted (and this "
 "document is processed)."
-msgstr ""
+msgstr "過帳 edi_format_id 應收帳單時產生的文件 (並且此文件已處理)."
+
+#. module: account_edi
+#: code:addons/account_edi/wizard/account_resequence.py:0
+#, python-format
+msgid ""
+"The following documents have already been sent and cannot be resequenced: %s"
+msgstr "以下文件已被傳送並且無法重新排序：%s"
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
 msgid ""
 "The invoice will be processed asynchronously by the following E-invoicing "
 "service :"
-msgstr ""
+msgstr "發票將由以下電子發票服務非同步處理 :"
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid ""
 "The payment will be processed asynchronously by the following E-invoicing "
 "service :"
-msgstr ""
+msgstr "付款將由以下電子發票服務非同步處理 :"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_edi_document__error
 msgid ""
 "The text of the last error that happened during Electronic Invoice "
 "operation."
-msgstr ""
+msgstr "電子發票操作期間發生的最後一個錯誤的文件."
 
 #. module: account_edi
 #: model:ir.model.constraint,message:account_edi.constraint_account_edi_format_unique_code
 msgid "This code already exists"
 msgstr "此代碼已存在"
+
+#. module: account_edi
+#: code:addons/account_edi/models/account_edi_document.py:0
+#, python-format
+msgid "This document is being sent by another process already. "
+msgstr "文件現正由另一處理程序傳送。"
 
 #. module: account_edi
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__state__to_cancel
@@ -435,10 +484,10 @@ msgstr "您無法編輯以下分錄 %s ,因為已傳送EDI文件。請改為使�
 #, python-format
 msgid ""
 "You can't unlink an attachment being an EDI document sent to the government."
-msgstr "您無法刪除附件，因此記錄包含了一個發送給政府的EDI文件"
+msgstr "您無法刪除附件，因此記錄包含了一個發送給政府的EDI文件."
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
 #: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "⇒ See errors"
-msgstr "⇒ 查看錯誤訊息"
+msgstr "⇒ 檢視錯誤訊息"

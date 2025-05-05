@@ -46,7 +46,7 @@ export function useAutofocus(params = {}) {
             const target = comp.el.querySelector(selector);
             if (target) {
                 target.focus();
-                if (["INPUT", "TEXTAREA"].includes(target.tagName)) {
+                if (["INPUT", "TEXTAREA"].includes(target.tagName) && target.type !== 'number') {
                     const inputEl = target;
                     inputEl.selectionStart = inputEl.selectionEnd = inputEl.value.length;
                 }
@@ -249,4 +249,18 @@ export function useService(serviceName) {
         }
     }
     return service;
+}
+
+/**
+ * Executes "callback" when the component is being destroyed
+ * @param  {Function} callback
+ */
+export function onDestroyed(callback) {
+    const component = useComponent();
+    const _destroy = component.__destroy;
+    component.__destroy = (...args) => {
+        _destroy.call(component, ...args);
+        // callback is called after super to guarantee the component is actually destroyed
+        callback();
+    };
 }

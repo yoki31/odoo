@@ -347,6 +347,7 @@ function factory(dependencies) {
             this._disconnectAudioMonitor && this._disconnectAudioMonitor();
             if (this.messaging.userSetting.usePushToTalk || !this.channel || !this.audioTrack) {
                 this.currentRtcSession.update({ isTalking: false });
+                await this._updateLocalAudioTrackEnabledState();
                 return;
             }
             try {
@@ -368,6 +369,7 @@ function factory(dependencies) {
                 });
                 this.currentRtcSession.update({ isTalking: true });
             }
+            await this._updateLocalAudioTrackEnabledState();
         }
 
         //----------------------------------------------------------------------
@@ -383,8 +385,8 @@ function factory(dependencies) {
          * @param {String} [param2.step] current step of the flow
          * @param {String} [param2.state] current state of the connection
          */
-        _addLogEntry(token, entry, { error, step, state } = {}) {
-            if (!this.env.isDebug()) {
+        _addLogEntry(token, entry, { error, step, state, ...data } = {}) {
+            if (!this.modelManager.isDebug) {
                 return;
             }
             if (!(token in this.logs)) {
@@ -399,6 +401,7 @@ function factory(dependencies) {
                     stack: error.stack && error.stack.split('\n'),
                 },
                 trace: trace.split('\n'),
+                ...data,
             });
             if (step) {
                 this.logs[token].step = step;
@@ -749,7 +752,20 @@ function factory(dependencies) {
                 if (peerConnection.iceConnectionState === 'connected') {
                     return;
                 }
-                this._addLogEntry(token, `calling back to recover ${peerConnection.iceConnectionState} connection, reason: ${reason}`);
+                if (this.modelManager.isDebug) {
+                    let stats;
+                    try {
+                        const peerConnectionStats = await peerConnection.getStats();
+                        stats = peerConnectionStats && [...peerConnectionStats.values()];
+                    } catch (_e) {
+                        // ignore
+                    }
+                    this._addLogEntry(
+                        token,
+                        `calling back to recover "${peerConnection.iceConnectionState}" connection`,
+                        { reason, stats }
+                    );
+                }
                 await this._notifyPeers([token], {
                     event: 'disconnect',
                 });
@@ -1200,7 +1216,7 @@ function factory(dependencies) {
             if (!this.channel) {
                 return;
             }
-            if (!this.messaging.userSetting.usePushToTalk || !this.messaging.userSetting.isPushToTalkKey(ev, { ignoreModifiers: true })) {
+            if (!this.messaging.userSetting.usePushToTalk || !this.messaging.userSetting.isPushToTalkKey(ev)) {
                 return;
             }
             if (!this.currentRtcSession.isTalking) {
